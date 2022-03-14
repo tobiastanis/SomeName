@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 spice_interface.load_standard_kernels()
 print("Running [Comparison_Dataset.py]")
 ### Simulation duration in days ###
-simulation_time = 10
+simulation_time = 20
 
 ### Modified Julian Dates ###
 t0_mjd = 60390.00           # Start time 21-03-2024 (next few days no stationkeeping
