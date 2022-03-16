@@ -17,6 +17,7 @@ print("Running [Comparison_Dataset.py]")
 ### Simulation duration in days ###
 simulation_time = 20
 
+
 ### Modified Julian Dates ###
 t0_mjd = 60390.00           # Start time 21-03-2024 (next few days no stationkeeping
 t1_mjd = 60418.00           # 18-04-2024 Next few days no stationkeeping

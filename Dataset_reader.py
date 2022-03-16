@@ -11,7 +11,6 @@ import numpy as np
 import pandas as pd
 import csv
 print("Running [Dataset_reader.py]")
-
 # Opening csv datasets
 LUMIO_datacsv = open('LUMIO_states.csv')
 Moon_datacsv = open('Moon_states.csv')
