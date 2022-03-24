@@ -214,4 +214,4 @@ output = np.vstack(list(output_dict.values()))
 states = np.vstack(list(states_dict.values()))
 
 
-print("[LUMIO_simulation.py] successfully ran \n")
+print("[LUMIO_LLO_propagation.py] successfully ran \n")
