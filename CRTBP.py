@@ -5,8 +5,9 @@ import numpy as np
 from tudatpy.kernel.interface import spice_interface
 from scipy.integrate import odeint
 from tudatpy.kernel import constants
+import Simulation_setup
 spice_interface.load_standard_kernels()
-
+print("Running [CRTBP.py]")
 
 def crtbp(x, t, mu):
     r1 = np.sqrt((mu + x[0]) ** 2 + x[1] ** 2 + x[2] ** 2)              #Distance to Primary (Earth)
@@ -36,11 +37,9 @@ v_char = L_char/t_char
 mu = spice_interface.get_body_gravitational_parameter("Moon")/(spice_interface.get_body_gravitational_parameter("Earth")+spice_interface.get_body_gravitational_parameter("Moon"))
 
 
-t_span = np.linspace(0, 20/t_char, 1000)
+t_span = np.linspace(0, Simulation_setup.simulation_time*constants.JULIAN_DAY/t_char, Simulation_setup.n_steps)
 x_ini = np.array([1.1435, 0, -0.1579, 0, -0.2220, 0])
 
 states = odeint(crtbp, x_ini, t_span, args=(mu,), rtol=1e-12, atol=1e-12)
-import matplotlib.pyplot as plt
-print(constants.GRAVITATIONAL_CONSTANT)
 
-plt.show()
+print("[CRTBP.py] ran successfully \n")
