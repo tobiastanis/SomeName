@@ -17,8 +17,7 @@ v_norm = data_norm_states[:, 3:6]
 
 t0 = Simulation_setup.simulation_start_epoch
 tend = Simulation_setup.simulation_end_epoch
-period = Simulation_setup.simulation_span
-
+period = Simulation_setup.simulation_span*constants.JULIAN_DAY
 m_char = CRTBP.m_char
 G = constants.GRAVITATIONAL_CONSTANT
 mu = CRTBP.mu
