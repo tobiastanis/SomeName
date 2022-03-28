@@ -149,6 +149,7 @@ link_ends[observations.receiver] = ("Delfi-C3", "")
 observation_settings_list = [observations.one_way_open_loop_doppler(link_ends)]
 
 # Define observation simulation times for each link (separated by steps of 1 minute)
+# Hier gaat t ergens fout in regel 153
 observation_times = np.arange(simulation_start_epoch, simulation_end_epoch, 60.0)
 observation_simulation_settings = observations.create_tabulated_simulation_settings(
     observations.one_way_doppler_type,
