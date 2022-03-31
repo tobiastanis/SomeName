@@ -131,6 +131,12 @@ ex2.set_title('Velocity LLO orbiter wrt Moon')
 ex2.set_xlabel('Time [days]')
 ex2.set_ylabel('Velocity [km/s]')
 
+fig7, (fx1, fx2) = plt.subplots(2, 1, constrained_layout=False, sharey=False)
+fx1.plot(time, output[:, 3])
+fx2.plot(time, output[:, 17])
+fx1.set_title('Solar radiation pressure LUMIO')
+fx2.set_title('Solar radiation pressure LLO')
+
 ### Acceleration contributions of all perturbations LUMIO
 plt.figure()
 plt.plot(time, np.linalg.norm(output[:, 0:3], axis=1))
@@ -256,6 +262,9 @@ plt.legend(['Earth', 'LUMIO', 'Moon', 'LLO orbiter'])
 plot.set_xlabel('x-direction [km]')
 plot.set_ylabel('y-direction [km]')
 plot.set_zlabel('z-direction [km]')
+
+
+
 
 print("[Figures_LUMIO_simulation.py] successfully ran \n")
 plt.show()

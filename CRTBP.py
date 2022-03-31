@@ -38,8 +38,12 @@ mu = spice_interface.get_body_gravitational_parameter("Moon")/(spice_interface.g
 
 
 t_span = np.linspace(0, Simulation_setup.simulation_time*constants.JULIAN_DAY/t_char, Simulation_setup.n_steps)
-x_ini = np.array([1.1435, 0, -0.1579, 0, -0.2220, 0])
+# Initial states Near-Rectilinear Orbits with ANACipriano with Grebow2006
+x_ini = np.array([1.1434, 0, -0.1576, 0, -0.2216, 0])
+x_ini1 = np.array([1.1350, 0, 0.1700, 0, -0.2245, 0])
 
 states = odeint(crtbp, x_ini, t_span, args=(mu,), rtol=1e-12, atol=1e-12)
+states1 = odeint(crtbp, x_ini1, t_span, args=(mu,), rtol=1e-12, atol=1e-12)
+
 
 print("[CRTBP.py] ran successfully \n")
