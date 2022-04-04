@@ -55,6 +55,9 @@ for i in range(len(period)):
     Z_ref = np.cross(r_Moon, v_Moon) / np.linalg.norm(np.cross(r_Moon, v_Moon))
     Y_ref = np.cross(Z_ref, X_ref)
     A_ref = np.transpose([X_ref, Y_ref, Z_ref])
+    print(X_ref)
+    print(A_ref)
+
     # Instantaneous angular velocity
     omega = np.linalg.norm(np.cross(r_Moon, v_Moon)) / (np.linalg.norm(r_Moon) ** 2)
     # The creation of B
@@ -69,6 +72,8 @@ for i in range(len(period)):
     A_top = np.concatenate((A_ref, O_ref), axis=1)
     A_bot = np.concatenate((B_ref, A_ref), axis=1)
     A_full = np.concatenate((A_top, A_bot), axis=0)
+    print(A_full)
+    quit()
     # State vector in the ephemeris frame
     x_ephem = np.transpose(np.matmul(A_full, sv_pc))[0]
     # print(x_ephem)
