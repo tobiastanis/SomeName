@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a0acce4-29d2-43b0-af26-5dd259e9a5ca" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Simple_Measurement_Model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CRTBP_to_ICRF.py" beforeDir="false" afterPath="$PROJECT_DIR$/CRTBP_to_ICRF.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulation_setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation_setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simple_Measurement_Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simple_Measurement_Model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +31,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.Comparison_Dataset">
+  <component name="RunManager" selected="Python.Simple_Measurement_Model">
     <configuration name="CRTBP_to_ICRF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SomeName" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -97,6 +95,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="LUMIO_LLO_propagation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="SomeName" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LUMIO_LLO_propagation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Simple_Measurement_Model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SomeName" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -110,27 +129,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Simple_Measurement_Model.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Simulation_setup" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="SomeName" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Simulation_setup.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -163,18 +161,18 @@
     <list>
       <item itemvalue="Python.tudat_space" />
       <item itemvalue="Python.Figures_LUMIO_LLO_propagation" />
-      <item itemvalue="Python.Simulation_setup" />
       <item itemvalue="Python.CRTBP_to_ICRF" />
       <item itemvalue="Python.Simple_Measurement_Model" />
       <item itemvalue="Python.Comparison_Dataset" />
+      <item itemvalue="Python.LUMIO_LLO_propagation" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Simple_Measurement_Model" />
+        <item itemvalue="Python.LUMIO_LLO_propagation" />
         <item itemvalue="Python.Comparison_Dataset" />
         <item itemvalue="Python.Figures_LUMIO_LLO_propagation" />
-        <item itemvalue="Python.Simple_Measurement_Model" />
         <item itemvalue="Python.CRTBP_to_ICRF" />
-        <item itemvalue="Python.Simulation_setup" />
       </list>
     </recent_temporary>
   </component>
