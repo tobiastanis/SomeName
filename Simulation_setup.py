@@ -19,7 +19,8 @@ simulation_time = 14            ####### Simulation time in days
 simulation_start_epoch = simulation_start_epoch(t0_mjd)
 simulation_end_epoch = simulation_start_epoch+simulation_time*constants.JULIAN_DAY
 
-fixed_time_step = 300
+fixed_time_step = 0.01*constants.JULIAN_DAY
+print(fixed_time_step/60)
 n_steps = math.floor((simulation_end_epoch-simulation_start_epoch)/fixed_time_step)+1
 simulation_span = np.linspace(0, simulation_time, n_steps)
 

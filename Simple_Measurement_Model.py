@@ -16,9 +16,12 @@ position_LLO_wrt_Moon = states_LLO_wrt_Moon[:, 3:6]
 LOS_vector = np.subtract(position_LUMIO_wrt_Moon, position_LLO_wrt_Moon)
 intersatelltie_distance = np.linalg.norm(LOS_vector, axis=1)
 
-measurement_noise = np.random.normal(0, 10e4, len(time))
+measurement_noise = np.random.normal(0, 10e2, len(time))
 
 measured_distance = np.add(intersatelltie_distance, measurement_noise)
+
+#Get relative velocity vector
+
 
 plt.figure()
 plt.plot(time, intersatelltie_distance, color='red')
