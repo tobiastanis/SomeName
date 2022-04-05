@@ -34,7 +34,6 @@ time = Simulation_setup.simulation_span
 LUMIO_initial_state = Dataset_reader.initial_state(t0)
 
 X_Moon = Moon_ephemeris(simulation_start_epoch, simulation_end_epoch, n_steps)
-
 ### Environment Setup ###
 # The creation of bodies
 bodies_to_create = [
