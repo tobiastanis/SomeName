@@ -227,8 +227,11 @@ for i in range(len(LUMIO_Dataset_states)):
     LUMIO_for_comparison.append(a)
 LUMIO_for_comparison = np.array([LUMIO_for_comparison])[0]
 Difference_scenario1 = np.subtract(LUMIO_Dataset_states, LUMIO_for_comparison)
-Difference_scenario1_norm = np.linalg.norm(Difference_scenario1, axis=1)
+Difference_scenario1_norm = np.linalg.norm(Difference_scenario1[:, 0:3], axis=1)
+
 print('Maximum difference in scenario 1: \n', max(Difference_scenario1_norm), 'm')
+
+
 
 endtime = datetime.now()
 

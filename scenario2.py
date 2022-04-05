@@ -79,7 +79,7 @@ radiation_pressure_settings_LLOsat = environment_setup.radiation_pressure.cannon
 environment_setup.add_radiation_pressure_interface(body_system,"LUMIO", radiation_pressure_settings_LUMIO)
 environment_setup.add_radiation_pressure_interface(body_system, "LLOsat",radiation_pressure_settings_LLOsat)
 acceleration_settings_LUMIO = dict(
-    Earth=[propagation_setup.acceleration.spherical_harmonic_gravity(40,40)],
+    Earth=[propagation_setup.acceleration.spherical_harmonic_gravity(30,30)],
     Moon=[propagation_setup.acceleration.point_mass_gravity()],
     Sun=[propagation_setup.acceleration.point_mass_gravity(),
          propagation_setup.acceleration.cannonball_radiation_pressure()],
@@ -233,7 +233,7 @@ for i in range(len(LUMIO_Dataset_states)):
     LUMIO_for_comparison.append(a)
 LUMIO_for_comparison = np.array([LUMIO_for_comparison])[0]
 Difference_scenario2 = np.subtract(LUMIO_Dataset_states, LUMIO_for_comparison)
-Difference_scenario2_norm = np.linalg.norm(Difference_scenario2, axis=1)
+Difference_scenario2_norm = np.linalg.norm(Difference_scenario2[:, 0:3], axis=1)
 
 print('Maximum difference in scenario 1: \n', max(Difference_scenario2_norm), 'm')
 

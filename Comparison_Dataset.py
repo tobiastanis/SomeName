@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 spice_interface.load_standard_kernels()
 print("Running [Comparison_Dataset.py]")
 ### Simulation duration in days ###
-simulation_time = 20
+simulation_time = 14
 
 
 ### Modified Julian Dates ###
@@ -320,6 +320,15 @@ plot.set_xlabel('x-direction [m]')
 plot.set_ylabel('y-direction [m]')
 plot.set_zlabel('z-direction [m]')
 
+
+print(max(np.linalg.norm(delta_LUMIO_state[:, 0:3], axis=1)))
 print("[Comparison_Dataset.py] successfully ran")
+print(np.linalg.norm(X_LUMIO_Dataset[:, 0:3], axis=1))
+print(max(np.linalg.norm(X_LUMIO_Dataset[:, 0:3], axis=1)))
+print(min(np.linalg.norm(X_LUMIO_Dataset[:, 0:3], axis=1)))
+
+ML2 = np.subtract(X_LUMIO_Dataset, X_Moon_Dataset)
+print(max(np.linalg.norm(ML2[:, 0:3], axis=1)), min(np.linalg.norm(ML2[:, 0:3], axis=1)))
+print(np.linalg.norm(ML2[:, 0:3], axis=1))
 
 plt.show()

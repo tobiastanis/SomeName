@@ -87,8 +87,8 @@ acceleration_settings_LUMIO = dict(
 )
 
 acceleration_settings_LLOsat = dict(
-    Earth=[propagation_setup.acceleration.spherical_harmonic_gravity(40,40)],
-    Moon=[propagation_setup.acceleration.spherical_harmonic_gravity(40,40)],
+    Earth=[propagation_setup.acceleration.spherical_harmonic_gravity(30,40)],
+    Moon=[propagation_setup.acceleration.spherical_harmonic_gravity(30,30)],
     Sun=[propagation_setup.acceleration.point_mass_gravity(),
          propagation_setup.acceleration.cannonball_radiation_pressure()],
     Mercury=[propagation_setup.acceleration.point_mass_gravity()],
@@ -227,7 +227,7 @@ for i in range(len(LUMIO_Dataset_states)):
     LUMIO_for_comparison.append(a)
 LUMIO_for_comparison = np.array([LUMIO_for_comparison])[0]
 Difference_scenario4 = np.subtract(LUMIO_Dataset_states, LUMIO_for_comparison)
-Difference_scenario4_norm = np.linalg.norm(Difference_scenario4, axis=1)
+Difference_scenario4_norm = np.linalg.norm(Difference_scenario4[:, 0:3], axis=1)
 
 print('Maximum difference in scenario 1: \n', max(Difference_scenario4_norm), 'm')
 

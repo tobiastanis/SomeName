@@ -15,7 +15,7 @@ t1_mjd = 60418.00           # 18-04-2024 Next few days no stationkeeping
 tend_mjd = 60755.00         # End of life time 21-03-2025
 
 
-simulation_time = 14            ####### Simulation time in days
+simulation_time = 10            ####### Simulation time in days
 # simulation start epoch gives the time in seconds from 01-01-2000 00:00, which is used to define celestial positions
 simulation_start_epoch = Dataset_reader.simulation_start_epoch(t0_mjd)
 simulation_end_epoch = simulation_start_epoch+simulation_time*constants.JULIAN_DAY

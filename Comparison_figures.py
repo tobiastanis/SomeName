@@ -36,22 +36,18 @@ ax3.plot(time, Delta2[:,2])
 ax3.plot(time, Delta3[:,2])
 ax3.plot(time, Delta4[:,2])
 
-fig2, (ax1, ax2, ax3) =  plt.subplots(3, 1, constrained_layout=True, sharey=False)
-ax1.plot(time, dataset_LUMIO[:,3])
-ax1.plot(time, states1[:, 3])
-ax2.plot(time, dataset_LUMIO[:,4])
-ax2.plot(time, states1[:, 4])
-ax3.plot(time, dataset_LUMIO[:,5])
-ax3.plot(time, states1[:, 5])
 
-
-plt.figure()
+plt.figure(figsize=(17,8))
 plt.plot(time, Delta1_norm)
 plt.plot(time, Delta2_norm)
 plt.plot(time, Delta3_norm)
 plt.plot(time, Delta4_norm)
-
-
+plt.xlabel('Time [days]')
+plt.ylabel('Absolute difference [m]')
+plt.title('Absolute difference of the scenarios from the dataset states')
+plt.legend(['Scenario 1', 'Scenario 2', 'Scenario 3', 'Scenario 4'])
+print(Delta1_norm)
+print(Delta3_norm)
 
 
 plt.show()
