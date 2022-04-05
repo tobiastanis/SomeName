@@ -7,6 +7,7 @@ Jupiter, Saturn, Uranus and Neptune and also Solar Radiation Pressure is taken i
 
 Note that the numbers used for SRP, are an estimate and not factual yet...
 """
+from datetime import datetime
 import Dataset_reader
 import Simulation_setup
 import numpy as np
@@ -18,6 +19,7 @@ from tudatpy.kernel.numerical_simulation import propagation_setup
 from Ephemeris_obtainer import Moon_ephemeris
 spice_interface.load_standard_kernels()
 
+starttime = datetime.now()
 
 print("Running [scenario1.py]")
 # Adjust simulation setting in [Simulation_setup.py]
@@ -232,7 +234,11 @@ for i in range(len(LUMIO_Dataset_states)):
 LUMIO_for_comparison = np.array([LUMIO_for_comparison])[0]
 Difference_scenario2 = np.subtract(LUMIO_Dataset_states, LUMIO_for_comparison)
 Difference_scenario2_norm = np.linalg.norm(Difference_scenario2, axis=1)
-print(max(Difference_scenario2_norm))
 
+print('Maximum difference in scenario 1: \n', max(Difference_scenario2_norm), 'm')
+
+endtime = datetime.now()
+
+print('Scenario 2 duration: {}'.format(endtime - starttime))
 
 print("[LUMIO_LLO_propagation.py] successfully ran \n")

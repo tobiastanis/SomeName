@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a0acce4-29d2-43b0-af26-5dd259e9a5ca" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/scenario2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Comparison_figures.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scenario1.py" beforeDir="false" afterPath="$PROJECT_DIR$/scenario1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenario2.py" beforeDir="false" afterPath="$PROJECT_DIR$/scenario2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenario3.py" beforeDir="false" afterPath="$PROJECT_DIR$/scenario3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenario4.py" beforeDir="false" afterPath="$PROJECT_DIR$/scenario4.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +43,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.scenario4">
-    <configuration name="Figures_scenario1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.Comparison_figures">
+    <configuration name="Comparison_figures" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SomeName" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -55,7 +56,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Figures_scenario1.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Comparison_figures.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -171,19 +172,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.tudat_space" />
-      <item itemvalue="Python.Figures_scenario1" />
       <item itemvalue="Python.scenario2" />
       <item itemvalue="Python.scenario3" />
       <item itemvalue="Python.scenario4" />
       <item itemvalue="Python.scenario1" />
+      <item itemvalue="Python.Comparison_figures" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Comparison_figures" />
         <item itemvalue="Python.scenario4" />
+        <item itemvalue="Python.scenario3" />
         <item itemvalue="Python.scenario2" />
         <item itemvalue="Python.scenario1" />
-        <item itemvalue="Python.scenario3" />
-        <item itemvalue="Python.Figures_scenario1" />
       </list>
     </recent_temporary>
   </component>
