@@ -32,7 +32,7 @@ time = Simulation_setup.simulation_span
 
 #######
 LUMIO_initial_state = Dataset_reader.initial_state(t0)
-
+LUMIO_Dataset_states = Dataset_reader.state_lumio(t0, tend)
 X_Moon = Moon_ephemeris(simulation_start_epoch, simulation_end_epoch, n_steps)
 ### Environment Setup ###
 # The creation of bodies
@@ -217,14 +217,22 @@ dynamic_simulator = numerical_simulation.SingleArcSimulator(
     body_system, integrator_settings, propagation_settings
 )
 
-########################################################################################################################
-####### RESULTS #################
+
+###### RESULTS ######
 output_dict = dynamic_simulator.dependent_variable_history
 states_dict = dynamic_simulator.state_history
 output = np.vstack(list(output_dict.values()))
 states = np.vstack(list(states_dict.values()))
-
-
+#### For comparison with the dataset
+LUMIO_states = states[:, 0:6]
+LUMIO_for_comparison = []
+for i in range(len(LUMIO_Dataset_states)):
+    a = LUMIO_states[25*i, :]
+    LUMIO_for_comparison.append(a)
+LUMIO_for_comparison = np.array([LUMIO_for_comparison])[0]
+Difference_scenario1 = np.subtract(LUMIO_Dataset_states, LUMIO_for_comparison)
+Difference_scenario1_norm = np.linalg.norm(Difference_scenario1, axis=1)
+print(max(Difference_scenario1_norm))
 
 
 print("[LUMIO_LLO_propagation.py] successfully ran \n")

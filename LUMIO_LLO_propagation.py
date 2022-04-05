@@ -206,8 +206,7 @@ dynamic_simulator = numerical_simulation.SingleArcSimulator(
     body_system, integrator_settings, propagation_settings
 )
 
-########################################################################################################################
-####### RESULTS #################
+###### RESULTS ######
 output_dict = dynamic_simulator.dependent_variable_history
 states_dict = dynamic_simulator.state_history
 output = np.vstack(list(output_dict.values()))

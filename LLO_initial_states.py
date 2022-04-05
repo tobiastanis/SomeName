@@ -40,6 +40,6 @@ initial_state_pathfinder = element_conversion.keplerian_to_cartesian_elementwise
 
 mass_LLOsat = 280       # kg
 reference_area_radiation_LLOsat = 1.0
-radiation_pressure_coefficient_LLOsat = 1.0
+radiation_pressure_coefficient_LLOsat = 1.08
 occulting_bodies_LLOsat = ["Moon", "Earth"]
 
