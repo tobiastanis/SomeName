@@ -208,6 +208,7 @@ propagation_settings = propagation_setup.propagator.translational(
     termination_condition,
     output_variables=dependent_variables_to_save
 )
+
 ### Integrating ###
 integrator_settings = numerical_simulation.propagation_setup.integrator.runge_kutta_4(
     simulation_start_epoch, fixed_time_step
@@ -218,27 +219,17 @@ dynamic_simulator = numerical_simulation.SingleArcSimulator(
     body_system, integrator_settings, propagation_settings
 )
 
-
 ###### RESULTS ######
 output_dict = dynamic_simulator.dependent_variable_history
 states_dict = dynamic_simulator.state_history
 output = np.vstack(list(output_dict.values()))
 states = np.vstack(list(states_dict.values()))
 
-
-#### For comparison with the dataset
-LUMIO_states = states[:, 0:6]
-LUMIO_for_comparison = []
-for i in range(len(LUMIO_Dataset_states)):
-    a = LUMIO_states[25*i, :]
-    LUMIO_for_comparison.append(a)
-LUMIO_for_comparison = np.array([LUMIO_for_comparison])[0]
-Difference_scenario1 = np.subtract(LUMIO_Dataset_states, LUMIO_for_comparison)
-Difference_scenario1_norm = np.linalg.norm(Difference_scenario1[:, 0:3], axis=1)
-
-print('Maximum difference in scenario 1: \n', max(Difference_scenario1_norm), 'm')
+states_LUMIO = states[:, 0:6]
+states_LLOsat_wrt_Moon = states[:, 6:12]
+states_LLOsat = np.subtract(states_LLOsat_wrt_Moon, X_Moon)
 
 endtime = datetime.now()
 
-print('Scenario 1 duration: {}'.format(endtime - starttime))
-print("[LUMIO_LLO_propagation.py] successfully ran \n")
+print('Dynamic model runtime: {}'.format(endtime - starttime))
+print("[Dynamic_Model.py] successfully ran \n")
