@@ -47,7 +47,9 @@ plt.ylabel('Absolute difference [m]')
 plt.title('Absolute difference of the scenarios from the dataset states')
 plt.legend(['Scenario 1', 'Scenario 2', 'Scenario 3', 'Scenario 4'])
 print(Delta1_norm)
+print(Delta2_norm)
 print(Delta3_norm)
+print(Delta4_norm)
 
 
 plt.show()

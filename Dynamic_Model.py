@@ -1,5 +1,10 @@
 """
+This is the first part of the Orbit Determination model, which consists of a Dynamic model, Measurement model and a
+Estimation model.
 
+This is the dynamic model of the propagation of LUMIO and the LLOsat. The simulation time is 10 days with a time step of
+0.01 JULIAN DAY. The simulation provides the nominal states of both LUMIO and LLOsat. Also, the model provides the
+acceleration inputs of all perturbations and the total acceleration acting on the satellites.
 """
 from datetime import datetime
 import Dataset_reader
@@ -15,7 +20,7 @@ spice_interface.load_standard_kernels()
 
 starttime = datetime.now()
 
-print("Running [scenario1.py]")
+print("Running [Dynamic_Model.py]")
 # Adjust simulation setting in [Simulation_setup.py]
 t0 = Simulation_setup.t0_mjd
 tend = t0+Simulation_setup.simulation_time
@@ -73,8 +78,8 @@ radiation_pressure_settings_LLOsat = environment_setup.radiation_pressure.cannon
 environment_setup.add_radiation_pressure_interface(body_system,"LUMIO", radiation_pressure_settings_LUMIO)
 environment_setup.add_radiation_pressure_interface(body_system, "LLOsat",radiation_pressure_settings_LLOsat)
 acceleration_settings_LUMIO = dict(
-    Earth=[propagation_setup.acceleration.spherical_harmonic_gravity(30,30)],
-    Moon=[propagation_setup.acceleration.spherical_harmonic_gravity(30,30)],
+    Earth=[propagation_setup.acceleration.point_mass_gravity()],
+    Moon=[propagation_setup.acceleration.point_mass_gravity()],
     Sun=[propagation_setup.acceleration.point_mass_gravity(),
          propagation_setup.acceleration.cannonball_radiation_pressure()],
     Mercury=[propagation_setup.acceleration.point_mass_gravity()],
@@ -87,7 +92,7 @@ acceleration_settings_LUMIO = dict(
 )
 
 acceleration_settings_LLOsat = dict(
-    Earth=[propagation_setup.acceleration.spherical_harmonic_gravity(30,30)],
+    Earth=[propagation_setup.acceleration.point_mass_gravity()],
     Moon=[propagation_setup.acceleration.spherical_harmonic_gravity(30,30)],
     Sun=[propagation_setup.acceleration.point_mass_gravity(),
          propagation_setup.acceleration.cannonball_radiation_pressure()],
@@ -123,10 +128,10 @@ dependent_variables_to_save = [
         propagation_setup.acceleration.cannonball_radiation_pressure_type, "LUMIO", "Sun"
     ),
     propagation_setup.dependent_variable.single_acceleration_norm(
-        propagation_setup.acceleration.spherical_harmonic_gravity_type, "LUMIO", "Earth"
+        propagation_setup.acceleration.point_mass_gravity_type, "LUMIO", "Earth"
     ),
     propagation_setup.dependent_variable.single_acceleration_norm(
-        propagation_setup.acceleration.spherical_harmonic_gravity_type, "LUMIO", "Moon"
+        propagation_setup.acceleration.point_mass_gravity_type, "LUMIO", "Moon"
     ),
     propagation_setup.dependent_variable.single_acceleration_norm(
         propagation_setup.acceleration.point_mass_gravity_type, "LUMIO", "Sun"
@@ -157,7 +162,7 @@ dependent_variables_to_save = [
         propagation_setup.acceleration.cannonball_radiation_pressure_type, "LLOsat", "Sun"
     ),
     propagation_setup.dependent_variable.single_acceleration_norm(
-        propagation_setup.acceleration.spherical_harmonic_gravity_type, "LLOsat", "Earth"
+        propagation_setup.acceleration.point_mass_gravity_type, "LLOsat", "Earth"
     ),
     propagation_setup.dependent_variable.single_acceleration_norm(
         propagation_setup.acceleration.spherical_harmonic_gravity_type, "LLOsat", "Moon"
@@ -219,6 +224,8 @@ output_dict = dynamic_simulator.dependent_variable_history
 states_dict = dynamic_simulator.state_history
 output = np.vstack(list(output_dict.values()))
 states = np.vstack(list(states_dict.values()))
+
+
 #### For comparison with the dataset
 LUMIO_states = states[:, 0:6]
 LUMIO_for_comparison = []
@@ -226,13 +233,12 @@ for i in range(len(LUMIO_Dataset_states)):
     a = LUMIO_states[25*i, :]
     LUMIO_for_comparison.append(a)
 LUMIO_for_comparison = np.array([LUMIO_for_comparison])[0]
-Difference_scenario4 = np.subtract(LUMIO_Dataset_states, LUMIO_for_comparison)
-Difference_scenario4_norm = np.linalg.norm(Difference_scenario4[:, 0:3], axis=1)
+Difference_scenario1 = np.subtract(LUMIO_Dataset_states, LUMIO_for_comparison)
+Difference_scenario1_norm = np.linalg.norm(Difference_scenario1[:, 0:3], axis=1)
 
-print('Maximum difference in scenario 1: \n', max(Difference_scenario4_norm), 'm')
+print('Maximum difference in scenario 1: \n', max(Difference_scenario1_norm), 'm')
 
 endtime = datetime.now()
 
-print('Scenario 4 duration: {}'.format(endtime - starttime))
-
+print('Scenario 1 duration: {}'.format(endtime - starttime))
 print("[LUMIO_LLO_propagation.py] successfully ran \n")
