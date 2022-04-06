@@ -227,7 +227,9 @@ states = np.vstack(list(states_dict.values()))
 
 states_LUMIO = states[:, 0:6]
 states_LLOsat_wrt_Moon = states[:, 6:12]
-states_LLOsat = np.subtract(states_LLOsat_wrt_Moon, X_Moon)
+states_LLOsat = np.add(states_LLOsat_wrt_Moon, X_Moon)
+relative_position_vector = output[:, 37:40]
+relative_velocity_vector = output[:, 40:43]
 
 endtime = datetime.now()
 
