@@ -93,7 +93,7 @@ acceleration_settings_LUMIO = dict(
 
 acceleration_settings_LLOsat = dict(
     Earth=[propagation_setup.acceleration.point_mass_gravity()],
-    Moon=[propagation_setup.acceleration.spherical_harmonic_gravity(30,30)],
+    Moon=[propagation_setup.acceleration.spherical_harmonic_gravity(12,12)],
     Sun=[propagation_setup.acceleration.point_mass_gravity(),
          propagation_setup.acceleration.cannonball_radiation_pressure()],
     Mercury=[propagation_setup.acceleration.point_mass_gravity()],

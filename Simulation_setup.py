@@ -10,9 +10,10 @@ import Dataset_reader
 #from Dataset_reader import simulation_start_epoch
 print("Running [Simulation_setup.py]")
 ### MJD times for datareading ###
-t1_mjd = 60390.00           # Start time 21-03-2024 (next few days no stationkeeping
-t0_mjd = 60418.00           # 18-04-2024 Next few days no stationkeeping
+t0_mjd = 60390.00           # Start time 21-03-2024 (next few days no stationkeeping
+t1_mjd = 60418.00           # 18-04-2024 Next few days no stationkeeping
 tend_mjd = 60755.00         # End of life time 21-03-2025
+t2_mjd = 59914.00           # comparison time for paper NaviMoon
 
 
 simulation_time = 10           ####### Simulation time in days

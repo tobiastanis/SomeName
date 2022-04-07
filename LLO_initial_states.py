@@ -35,11 +35,11 @@ initial_state_pathfinder = element_conversion.keplerian_to_cartesian_elementwise
     inclination=np.deg2rad(57.82),
     argument_of_periapsis=np.deg2rad(90),
     longitude_of_ascending_node=np.rad2deg(61.552),
-    true_anomaly=np.deg2rad(30)
+    true_anomaly=np.deg2rad(0)
 )
 
 mass_LLOsat = 280       # kg
-reference_area_radiation_LLOsat = 1.0
-radiation_pressure_coefficient_LLOsat = 1.08
+reference_area_radiation_LLOsat = 3
+radiation_pressure_coefficient_LLOsat = 1.8
 occulting_bodies_LLOsat = ["Moon", "Earth"]
 
