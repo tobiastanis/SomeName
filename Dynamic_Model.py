@@ -15,9 +15,12 @@ from tudatpy.kernel import numerical_simulation
 from tudatpy.kernel.interface import spice_interface
 from tudatpy.kernel.numerical_simulation import environment_setup
 from tudatpy.kernel.numerical_simulation import propagation_setup
+from tudatpy.kernel.numerical_simulation import estimation_setup
 from Ephemeris_obtainer import Moon_ephemeris
-spice_interface.load_standard_kernels()
 
+## Loading SPICE kernels
+spice_interface.load_standard_kernels()
+# Measuring dynamic model runtime
 starttime = datetime.now()
 
 print("Running [Dynamic_Model.py]")
@@ -235,3 +238,4 @@ endtime = datetime.now()
 
 print('Dynamic model runtime: {}'.format(endtime - starttime))
 print("[Dynamic_Model.py] successfully ran \n")
+
