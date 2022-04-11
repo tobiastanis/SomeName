@@ -1,9 +1,8 @@
 """
-
+State transition matrices are obtained by using parts of the dynamic model.
 """
 import Dataset_reader
 import Simulation_setup
-import numpy as np
 from tudatpy.kernel import numerical_simulation
 from tudatpy.kernel.interface import spice_interface
 from tudatpy.kernel.numerical_simulation import environment_setup
@@ -14,7 +13,7 @@ from Ephemeris_obtainer import Moon_ephemeris
 ## Loading SPICE kernels
 spice_interface.load_standard_kernels()
 
-print("Running [State_Transition_Matrix.py]")
+print("Running [State_Transition_Matrix_LUMIO.py]")
 # Adjust simulation setting in [Simulation_setup.py]
 t0 = Simulation_setup.t0_mjd
 tend = t0+Simulation_setup.simulation_time
@@ -123,7 +122,7 @@ variational_equations_solver = numerical_simulation.SingleArcVariationalSimulato
 state_transition_matrices = variational_equations_solver.state_transition_matrix_history
 
 
-print("[State_Transition_Matrix.py] successfully ran \n")
+print("[State_Transition_Matrix_LUMIO.py] successfully ran \n")
 
 
 
