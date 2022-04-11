@@ -8,7 +8,9 @@ import sympy as sp
 import Dynamic_Model
 import Simulation_setup
 # tudatpy libraries
+from tudatpy.kernel import numerical_simulation
 from tudatpy.kernel.interface import spice
+
 # Load spice kernels
 spice.load_standard_kernels()
 print('Running [tobenamed.py]')
@@ -69,4 +71,8 @@ for i in range(len(rho_abs)):
     H_wave_bot.append(H_bot_element)
 H_wave_bot = np.array(H_wave_bot)
 
-########################### State Transition Matrix #######################
+########################### State Transition Matrix and matrix A ######################
+# phi initial is I
+# A is the partial derivative matrix of X_dot_star (12x12)
+#phi_dot = A*phi
+

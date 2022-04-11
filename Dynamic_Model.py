@@ -62,7 +62,6 @@ body_system.get("LLOsat").mass = LLO_initial_states.mass_LLOsat
 
 bodies_to_propagate = ["LUMIO", "LLOsat"]
 central_bodies = ["Earth", "Moon"]
-
 ### Acceleration Setup ###
 # SRP
 reference_area_radiation_LUMIO = Simulation_setup.reference_area_radiation_LUMIO
@@ -235,7 +234,10 @@ relative_position_vector = output[:, 37:40]
 relative_velocity_vector = output[:, 34:37]
 
 endtime = datetime.now()
+print('Maximum inter-satellite distance:', max(np.linalg.norm(relative_position_vector, axis=1))*10**-3, 'km \n')
+print('Minimum inter-satellite distance:', min(np.linalg.norm(relative_position_vector, axis=1))*10**-3, 'km \n')
 
 print('Dynamic model runtime: {}'.format(endtime - starttime))
 print("[Dynamic_Model.py] successfully ran \n")
+
 
