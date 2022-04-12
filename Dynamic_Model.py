@@ -197,7 +197,8 @@ dependent_variables_to_save = [
     propagation_setup.dependent_variable.relative_velocity("LUMIO", "Moon"),
     propagation_setup.dependent_variable.relative_velocity("LUMIO", "LLOsat"),
     propagation_setup.dependent_variable.relative_position("LUMIO", "LLOsat"),
-    propagation_setup.dependent_variable.relative_distance("LUMIO", "LLOsat")
+    propagation_setup.dependent_variable.relative_distance("LUMIO", "LLOsat"),
+    propagation_setup.dependent_variable.relative_position("LLOsat", "Earth")
 ]
 
 ### Propagating ###

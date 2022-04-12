@@ -121,7 +121,6 @@ variational_equations_solver = numerical_simulation.SingleArcVariationalSimulato
 
 state_transition_matrices_lumio = variational_equations_solver.state_transition_matrix_history
 
-
 print("[State_Transition_Matrix_LUMIO.py] successfully ran \n")
 
 

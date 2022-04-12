@@ -124,7 +124,6 @@ variational_equations_solver = numerical_simulation.SingleArcVariationalSimulato
 )
 
 state_transition_matrices_llosat = variational_equations_solver.state_transition_matrix_history
-print(state_transition_matrices_llosat)
 print("[State_Transition_Matrix_LLOsat.py] successfully ran \n")
 
 

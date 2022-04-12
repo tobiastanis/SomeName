@@ -10,26 +10,32 @@ right triangle
 All parameters used are in SI units
 
 """
-import LUMIO_LLO_propagation
+import Dynamic_Model
 import numpy as np
 from tudatpy.kernel.interface import spice_interface
 spice_interface.load_standard_kernels()
 
 print('Running [Visibility_Analysis.py')
-time = LUMIO_LLO_propagation.time
+time = Dynamic_Model.time
 ### Radius Moon
 radius_Moon = spice_interface.get_average_radius("Moon")    # [m]
 
 ### Getting the states
 # LUMIO is wrt Earth and LLO is wrt Moon
-states = LUMIO_LLO_propagation.states
-Moon_wrt_Earth = LUMIO_LLO_propagation.X_Moon
+states = Dynamic_Model.states
+Moon_wrt_Earth = Dynamic_Model.X_Moon
 # Both positionvectors are wrt Moon
-pos_LUMIO = LUMIO_LLO_propagation.output[:, 28:31]
+pos_LUMIO = Dynamic_Model.output[:, 28:31]
 pos_LLO = states[:, 6:9]
 
-intersatellite_vector = np.subtract(pos_LUMIO, pos_LLO)
+pos_LUMIO_earth = states[:, 0:3]
+pos_LLOsat_earth = Dynamic_Model.output[:, 41:44]
+
+#intersatellite_vector = np.subtract(pos_LUMIO_earth, pos_LLOsat_earth)
+intersatellite_vector = np.subtract(pos_LUMIO,pos_LLO)
+#intersatellite_vector = Dynamic_Model.relative_position_vector
 norm_intersatellite_vector = np.linalg.norm(intersatellite_vector, axis=1)
+
 
 
 ##### a = vector LUMIO wrt Moon, b = intersatellite distance
