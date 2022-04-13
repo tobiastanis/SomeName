@@ -3,6 +3,7 @@ Computation of the State Transition Matrix for LLOsat
 """
 import Simulation_setup
 import LLO_initial_states
+import numpy as np
 from tudatpy.kernel import numerical_simulation
 from tudatpy.kernel.interface import spice_interface
 from tudatpy.kernel.numerical_simulation import environment_setup
@@ -117,6 +118,7 @@ variational_equations_solver = numerical_simulation.SingleArcVariationalSimulato
     body_system, integrator_settings, propagation_settings,
     estimation_setup.create_parameters_to_estimate(parameter_settings, body_system), integrate_on_creation=1
 )
+
 
 state_transition_matrices_llosat = variational_equations_solver.state_transition_matrix_history
 print("[State_Transition_Matrix_LLOsat.py] successfully ran \n")

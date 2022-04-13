@@ -8,7 +8,7 @@ from Dynamic_Model import states_LUMIO
 from Dynamic_Model import states_LLOsat
 
 norm_position_vector = np.linalg.norm(relative_position_vector, axis=1)
-sigma_noise = np.random.normal(0, 10e2, len(norm_position_vector))
+sigma_noise = np.random.normal(0, 10, len(norm_position_vector))
 #Defining the observation array
 observations_array = np.add(norm_position_vector, sigma_noise)
 

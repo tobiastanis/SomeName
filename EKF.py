@@ -1,92 +1,102 @@
 """
-Input for EKF
+Extended Kalman Filter
 """
+### Imports ###
+#General
 import numpy as np
-import Measurement_Model
+import matplotlib.pyplot as plt
+#Own libraries
+import EKF_formulas_and_input as ekf
 import Dynamic_Model
-import State_Transition_Matrix_LUMIO
-from EKF_formulas_and_input import H_range_LUMIO_simulation
-from tudatpy.kernel import constants
-Phi_LUMIO = State_Transition_Matrix_LUMIO.state_transition_matrices_lumio
-#1.######################################################
-# Observations array
-y = Measurement_Model.observations_array
-y_hat = Measurement_Model.norm_position_vector
-rho = Dynamic_Model.relative_position_vector
-#2.######################################################
-# Trajectory Dynamic_Model.py
-X_true_initial = Dynamic_Model.states_LUMIO
-a_LUMIO = Dynamic_Model.output[:, 0:3]
-Xdot_true_initial = np.concatenate((X_true_initial[:, 3:6], a_LUMIO), axis=1)
+import Measurement_Model
 
-#Initial state error [m] n [m/s]
-x_err = np.array([10, 10, 10, 0.1, 0.1, 0.1])
-# Initial covariance matrix
-P0 = np.diagflat([[1, 1, 1],[0.1, 0.1, 0.1]])
-# Timestep
+# Time stuff
 dt = Dynamic_Model.fixed_time_step
-# Timespan
 time = Dynamic_Model.time
+endtime = max(time)
 t_ET = Dynamic_Model.ephemeris_time_span
 
-# Endtime [days]
-simulation_end_epoch = 10.0 #days
+# Reference trajectory states
+X_LUMIO_ref = Dynamic_Model.states_LUMIO
+X_LLO_ref = Dynamic_Model.states_LLOsat
+X_reference = np.concatenate((X_LUMIO_ref, X_LLO_ref), axis=1)
 
-#eyematrix diagonal 6x6
-I = np.diagflat([[1,1,1], [1,1,1]])
+a_LUMIO = Dynamic_Model.output[:, 0:3]
+a_LLOsat = Dynamic_Model.output[:, 14:17]
 
-#3.###################################################
-# Initial estimated state
-X_initial_estimated = X_true_initial[0,:] + x_err
+Xdot_reference = np.concatenate((np.concatenate((X_reference[:, 3:6], a_LUMIO), axis=1), \
+                 np.concatenate((X_reference[:, 9:12], a_LLOsat), axis=1)), axis=1)
 
-#4.################################################
-#Dummy Q (state noise compensation)
-Q = np.diagflat([[0.0001, 0.0001, 0.0001], [0.0001, 0.0001, 0.0001]])
+# Reference measurements
+relative_position_vector = Dynamic_Model.relative_position_vector
+relative_velocity_vector = Dynamic_Model.relative_velocity_vector
+norm_position_vector = Measurement_Model.norm_position_vector
+observation_array = Measurement_Model.observations_array
 
-#5.###############################################
-# Initial conditions
-x_k1_k1 = X_initial_estimated
+# Initial errors and P0
+x_error_ini = np.array([10, 10, 10, 0.1, 0.1, 0.1, 4, 4, 4, 0.05, 0.05, 0.05])
+a = np.random.normal(0,1); b = np.random.normal(0, 0.5)
+P0 = np.diagflat([[np.random.normal(0,1), np.random.normal(0,1), np.random.normal(0,1),
+                   np.random.normal(0, 0.5), np.random.normal(0, 0.5), np.random.normal(0, 0.5)],
+                  [np.random.normal(0,1), np.random.normal(0,1), np.random.normal(0,1),
+                   np.random.normal(0, 0.5), np.random.normal(0, 0.5), np.random.normal(0, 0.5)]])
+
+# Adding errors on top of the initial true states
+X_initial_estimated = X_reference[0, :] + x_error_ini
+
+# Defining Q, the state noise compensation matrix
+Q = np.diagflat([[np.random.normal(0,0.2), np.random.normal(0,0.2), np.random.normal(0,0.2),
+                  np.random.normal(0,0.2), np.random.normal(0,0.2), np.random.normal(0,0.2)],
+                 [np.random.normal(0,0.2), np.random.normal(0,0.2), np.random.normal(0,0.2),
+                  np.random.normal(0,0.2), np.random.normal(0,0.2), np.random.normal(0,0.2)]])
+
+# Initializing
+#x_k1_k1 = np.transpose([X_initial_estimated])
 P_k1_k1 = P0
+x_hat_k1 = np.transpose([x_error_ini])
 
-STORE_x_err = []
-STORE_x = []
+# Savings for later
+x_error = []
+X_estimated = []
 for i in range(len(time)):
-    xdot = Xdot_true_initial[i]
-    # Predicting the state (Forward Euler)
-    x_k1_k = x_k1_k1 + xdot*dt
-    # Covariance matrix propagated forward in time
-    Phi = Phi_LUMIO[t_ET[i]]
-    P_hat_k = np.add(np.matmul(np.matmul(Phi, P_k1_k1), np.transpose(Phi)), Q)
-    # Computing H
-    H = H_range_LUMIO_simulation(rho[i,0], rho[i,1], rho[i,2])
-    # White Gaussian noise matrix R (prop not necessary
-    R = np.array([[np.random.normal(0,1), 0, 0, 0, 0, 0],
-                  [0, np.random.normal(0,1), 0, 0, 0, 0],
-                  [0, 0, np.random.normal(0,1), 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0]])
-    # Calculating the Kalman gain matrix K
-    K = np.matmul(H,P_hat_k)*(y[i]-y_hat[i])
+    count = i
+    print(count)
+    X_star = np.transpose([X_reference[i]])
+    # Defining Phi, the state transition matrix
+    Phi = ekf.Phi(i)
+    # Calculating error forward using Phi
+    x_flat_k = np.matmul(Phi, x_hat_k1)
+    # Defining Xdot from reference solution
+    Xdot = np.transpose([Xdot_reference[i]])
+    # Covariance matrix propagated
+    P_hat = np.add(np.matmul(np.matmul(Phi, P_k1_k1), np.transpose(Phi)), Q)
+    # Relating the observation to the state with H
+    H = ekf.H_range_2sat_simulation(X_star)
+    H_trans = np.transpose([H])
+    # Kalman gain K
+    Y = observation_array[i]
+    Y_ref = norm_position_vector[i]
+    y = Y - Y_ref
+    K = np.matmul(P_hat,H_trans)*(Y-Y_ref)
     # Updating Covariance matrix P
-    P = np.matmul((np.subtract(I,np.matmul(K,H))),P_hat_k)
-    # State error
-    x_error = y[i]*K
-    # State
-    X_new = x_k1_k + x_error
-    ### Savings
-    STORE_x.append(X_new)
-    STORE_x_err.append(x_error)
-    # Updating
-    x_k1_k1 = X_new
+    P = (np.eye(12) - K*H)*P_hat
+    # Update estimated state error
+    x_hat = x_flat_k + K*(y-np.matmul(H, x_flat_k)[0])
+    x_error.append(x_hat)
+    # Update estimated state X_est
+    X_est = X_star + x_hat
+    X_estimated.append(X_est)
+    # Updating state error and covaiance matrix
+    x_hat_k1 = x_hat
     P_k1_k1 = P
 
-x_error = np.array(STORE_x_err)
+x_error = np.array(x_error)
 
-import matplotlib.pyplot as plt
 plt.figure()
-plt.plot(time, x_error[:,0])
+plt.plot(time, x_error[:, 0])
 
 
 
 plt.show()
+
+
