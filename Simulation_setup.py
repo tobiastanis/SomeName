@@ -25,7 +25,7 @@ fixed_time_step = 0.01*constants.JULIAN_DAY
 n_steps = math.floor((simulation_end_epoch-simulation_start_epoch)/fixed_time_step)+1
 simulation_span = np.linspace(0, simulation_time, n_steps)
 
-# Needed to obtain stataes of celestial bodies over an interval
+# Needed to obtain states of celestial bodies over an interval
 ephemeris_time_span = np.linspace(simulation_start_epoch, simulation_end_epoch, n_steps)
 
 ##### Initial states of LUMIO

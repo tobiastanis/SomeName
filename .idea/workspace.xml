@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a0acce4-29d2-43b0-af26-5dd259e9a5ca" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/EKF.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/EKF_formulas_and_input.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dynamic_Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dynamic_Model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simple_Measurement_Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Measurement_Model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EKF.py" beforeDir="false" afterPath="$PROJECT_DIR$/EKF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation_setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation_setup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/State_Transition_Matrix_LLOsat.py" beforeDir="false" afterPath="$PROJECT_DIR$/State_Transition_Matrix_LLOsat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/State_Transition_Matrix_LUMIO.py" beforeDir="false" afterPath="$PROJECT_DIR$/State_Transition_Matrix_LUMIO.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visibility_Analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Visibility_Analysis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +65,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Figures_Dynamic_Model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="EKF_formulas_and_input" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SomeName" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -78,7 +77,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Figures_Dynamic_Model.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EKF_formulas_and_input.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -108,7 +107,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="State_Transition_Matrix_LUMIO (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="State_Transition_Matrix_LUMIO" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SomeName" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -129,7 +128,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Visibility_Analysis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="rho_symbolic" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SomeName" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -141,7 +140,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Visibility_Analysis.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/rho_symbolic.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -173,19 +172,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.tudat_space" />
-      <item itemvalue="Python.State_Transition_Matrix_LUMIO (1)" />
-      <item itemvalue="Python.Figures_Dynamic_Model" />
       <item itemvalue="Python.Measurement_Model" />
-      <item itemvalue="Python.Visibility_Analysis" />
       <item itemvalue="Python.EKF" />
+      <item itemvalue="Python.rho_symbolic" />
+      <item itemvalue="Python.EKF_formulas_and_input" />
+      <item itemvalue="Python.State_Transition_Matrix_LUMIO" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.EKF" />
+        <item itemvalue="Python.State_Transition_Matrix_LUMIO" />
+        <item itemvalue="Python.EKF_formulas_and_input" />
+        <item itemvalue="Python.rho_symbolic" />
         <item itemvalue="Python.Measurement_Model" />
-        <item itemvalue="Python.Visibility_Analysis" />
-        <item itemvalue="Python.State_Transition_Matrix_LUMIO (1)" />
-        <item itemvalue="Python.Figures_Dynamic_Model" />
       </list>
     </recent_temporary>
   </component>
