@@ -25,4 +25,8 @@ def Phi(i):
     bot = np.concatenate((zero_room, Phi_LLOsat[t_ET[i]]), axis=1)
     return np.concatenate((top, bot), axis=0)
 
+def Y(x_k1_k):
+    x1 =x_k1_k[0]; y1 =x_k1_k[1]; z1=x_k1_k[2]; x2=x_k1_k[6]; y2=x_k1_k[7]; z2=x_k1_k[8]
+    return ((x1-x2)**2 + (y1-y2)**2 + (z1-z2)**2)**0.5
+
 

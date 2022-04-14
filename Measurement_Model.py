@@ -12,7 +12,6 @@ sigma_noise = np.random.normal(0, 10, len(norm_position_vector))
 #Defining the observation array
 observations_array = np.add(norm_position_vector, sigma_noise)
 
-
 ### From 38_lumiopowerdistr.dpf
 # inter-satellite downlink budget assumptions
 # Minimum operation distance [m]

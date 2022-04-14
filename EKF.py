@@ -34,12 +34,12 @@ norm_position_vector = Measurement_Model.norm_position_vector
 observation_array = Measurement_Model.observations_array
 
 # Initial errors and P0
-x_error_ini = np.array([10, 10, 10, 0.1, 0.1, 0.1, 4, 4, 4, 0.05, 0.05, 0.05])
+x_error_ini = np.array([500, 500, 500, 0.001, 0.001, 0.001, 100, 100, 100, 0.0005, 0.0005, 0.0005])
 a = np.random.normal(0,1); b = np.random.normal(0, 0.5)
-P0 = np.diagflat([[np.random.normal(0,1), np.random.normal(0,1), np.random.normal(0,1),
-                   np.random.normal(0, 0.5), np.random.normal(0, 0.5), np.random.normal(0, 0.5)],
-                  [np.random.normal(0,1), np.random.normal(0,1), np.random.normal(0,1),
-                   np.random.normal(0, 0.5), np.random.normal(0, 0.5), np.random.normal(0, 0.5)]])
+P0 = np.diagflat([[np.random.normal(0,0.1), np.random.normal(0,0.1), np.random.normal(0,0.1),
+                   np.random.normal(0, 0.01), np.random.normal(0, 0.01), np.random.normal(0, 0.01)],
+                  [np.random.normal(0,0.1), np.random.normal(0,0.1), np.random.normal(0,0.1),
+                   np.random.normal(0, 0.01), np.random.normal(0, 0.01), np.random.normal(0, 0.01)]])
 
 # Adding errors on top of the initial true states
 X_initial_estimated = X_reference[0, :] + x_error_ini
@@ -73,7 +73,7 @@ for i in range(len(time)):
     # Relating the observation to the state with H
     H = ekf.H_range_2sat_simulation(X_star)
     H_trans = np.transpose([H])
-    # Kalman gain K
+    # Kalman gain K 77 tm
     Y = observation_array[i]
     Y_ref = norm_position_vector[i]
     y = Y - Y_ref
