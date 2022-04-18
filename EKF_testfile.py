@@ -40,9 +40,9 @@ Xdot_star = np.concatenate((np.concatenate((X_est[:, 3:6], a_LUMIO), axis=1),
 Y_star = Measurement_Model.observations_array
 
 # Initial errors and P0
-P0 = np.diagflat([[np.random.normal(0,0.1), np.random.normal(0,0.1), np.random.normal(0,0.1),
-                   np.random.normal(0, 0.01), np.random.normal(0, 0.01), np.random.normal(0, 0.1)],
-                  [np.random.normal(0,0.1), np.random.normal(0,0.1), np.random.normal(0,0.1),
+P0 = np.diagflat([[np.random.normal(0,0.01), np.random.normal(0,0.01), np.random.normal(0,0.01),
+                   np.random.normal(0, 0.01), np.random.normal(0, 0.01), np.random.normal(0, 0.01)],
+                  [np.random.normal(0,0.01), np.random.normal(0,0.01), np.random.normal(0,0.01),
                    np.random.normal(0, 0.01), np.random.normal(0, 0.01), np.random.normal(0, 0.01)]])
 
 # Defining Q, the state noise compensation matrix
