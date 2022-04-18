@@ -4,7 +4,6 @@ Extended Kalman Filter
 ### Imports ###
 #General
 import numpy as np
-import os
 import matplotlib.pyplot as plt
 #Own libraries
 import EKF_formulas_and_input as ekf
@@ -23,7 +22,7 @@ X_LLO_ref = Dynamic_Model.states_LLOsat
 # True initial states (reference trajectory)
 X0 = np.concatenate((X_LUMIO_ref, X_LLO_ref), axis=1)
 # Error over all nominal states
-x_error = np.array([500, 500, 500, 0.001, 0.001, 0.001, 100, 100, 100, 0.0005, 0.0005, 0.0005])
+x_error = np.array([300, 300, 300, 0.001, 0.001, 0.001, 100, 100, 100, 0.0005, 0.0005, 0.0005])
 # Nominal states
 X_est = []
 for i in range(len(time)):
@@ -41,10 +40,10 @@ Xdot_star = np.concatenate((np.concatenate((X_est[:, 3:6], a_LUMIO), axis=1),
 Y_star = Measurement_Model.observations_array
 
 # Initial errors and P0
-P0 = np.diagflat([[np.random.normal(0,0.01), np.random.normal(0,0.01), np.random.normal(0,0.01),
-                   np.random.normal(0, 0.001), np.random.normal(0, 0.001), np.random.normal(0, 0.01)],
-                  [np.random.normal(0,0.01), np.random.normal(0,0.01), np.random.normal(0,0.01),
-                   np.random.normal(0, 0.001), np.random.normal(0, 0.001), np.random.normal(0, 0.001)]])
+P0 = np.diagflat([[np.random.normal(0,0.1), np.random.normal(0,0.1), np.random.normal(0,0.1),
+                   np.random.normal(0, 0.01), np.random.normal(0, 0.01), np.random.normal(0, 0.1)],
+                  [np.random.normal(0,0.1), np.random.normal(0,0.1), np.random.normal(0,0.1),
+                   np.random.normal(0, 0.01), np.random.normal(0, 0.01), np.random.normal(0, 0.01)]])
 
 # Defining Q, the state noise compensation matrix
 Q = np.diagflat([[np.random.normal(0,0.02), np.random.normal(0,0.02), np.random.normal(0,0.02),
@@ -52,23 +51,17 @@ Q = np.diagflat([[np.random.normal(0,0.02), np.random.normal(0,0.02), np.random.
                  [np.random.normal(0,0.02), np.random.normal(0,0.02), np.random.normal(0,0.02),
                   np.random.normal(0,0.02), np.random.normal(0,0.02), np.random.normal(0,0.02)]])
 # Defining R
-"""
-R = np.diagflat([[np.random.normal(0,0.1)**2, np.random.normal(0,0.1)**2, np.random.normal(0,0.1)**2,
-                  np.random.normal(0,0.1)**2, np.random.normal(0,0.1)**2, np.random.normal(0,0.1)**2],
-                 [np.random.normal(0,0.1)**2, np.random.normal(0,0.1)**2, np.random.normal(0,0.1)**2,
-                  np.random.normal(0,0.1)**2, np.random.normal(0,0.1)**2, np.random.normal(0,0.1)**2]])
-"""
 R = np.random.normal(0,0.01)
 # Initializing
 #x_k1_k1 = np.transpose([X_initial_estimated])
 P_k1_k1 = P0
 #x_k1_k1 = np.transpose([X_est[0,:]])
 x_k1_k1 = np.transpose([x_error])
-Xk = np.transpose([X_est[0,:]])
 I = np.eye(12, dtype=int)
 
 xk_hat = []
 X_ekf = []
+y_diff = []
 for i in range(len(time)):
     count = i
     print(count)
@@ -80,10 +73,10 @@ for i in range(len(time)):
     # Upating P_k1_k1 to P_flat_k
     P_hat = np.add(np.matmul(np.matmul(Phi, P_k1_k1), np.transpose(Phi)), Q)
     # Obtaining Y from x_k1_k and defining y
-    Y = ekf.Y(Xk)[0]
+    Y = ekf.Y(Xstar_k_1)[0]
     y = Y - Y_ref
     # Defining H
-    H = ekf.H_range_2sat_simulation(Xk)
+    H = ekf.H_range_2sat_simulation(Xstar_k_1)
     # Computing the Kalman gain
     K = np.matmul(P_hat,np.transpose([H]))*(np.matmul(np.matmul(H,P_hat), np.transpose(H)) - R)**-1
     # Computing covariance matrix
@@ -94,17 +87,79 @@ for i in range(len(time)):
     # Savings
     xk_hat.append(xk)
     X_ekf.append(Xstar_k)
+    y_diff.append(y)
     # Measurement update
     P_k1_k1 = Pk
     x_k1_k1 = xk
 
-
-
-xk_hat = np.array(xk_hat)
+x_error = np.array(xk_hat)
 X_ekf = np.array(X_ekf)
+y_diff = np.array(y_diff)
+
+fig1, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True, sharey=False)
+ax1.plot(time, x_error[:, 0])
+ax1.set_title('EKF position error LUMIO in x-direction')
+ax1.set_xlabel('Time [days]')
+ax1.set_ylabel('Position error [m]')
+ax2.plot(time, x_error[:, 1])
+ax2.set_title('EKF position error LUMIO in y-direction')
+ax2.set_xlabel('Time [days]')
+ax2.set_ylabel('Position error [m]')
+ax3.plot(time, x_error[:, 2])
+ax3.set_title('EKF position error LUMIO in z-direction')
+ax3.set_xlabel('Time [days]')
+ax3.set_ylabel('Position error [m]')
+
+fig2, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True, sharey=False)
+ax1.plot(time, x_error[:, 6])
+ax1.set_title('EKF position error LLOsat in x-direction')
+ax1.set_xlabel('Time [days]')
+ax1.set_ylabel('Position error [m]')
+ax2.plot(time, x_error[:, 7])
+ax2.set_title('EKF position error LLOsat in y-direction')
+ax2.set_xlabel('Time [days]')
+ax2.set_ylabel('Position error [m]')
+ax3.plot(time, x_error[:, 8])
+ax3.set_title('EKF position error LLOsat in z-direction')
+ax3.set_xlabel('Time [days]')
+ax3.set_ylabel('Position error [m]')
+
+fig3, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True, sharey=False)
+ax1.plot(time, x_error[:, 3])
+ax1.set_title('EKF velocity error LUMIO in x-direction')
+ax1.set_xlabel('Time [days]')
+ax1.set_ylabel('velocity error [m/s]')
+ax2.plot(time, x_error[:, 4])
+ax2.set_title('EKF velocity error LUMIO in y-direction')
+ax2.set_xlabel('Time [days]')
+ax2.set_ylabel('velocity error [m/s]')
+ax3.plot(time, x_error[:, 5])
+ax3.set_title('EKF velocity error LUMIO in z-direction')
+ax3.set_xlabel('Time [days]')
+ax3.set_ylabel('velocity error [m/s]')
+
+fig4, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True, sharey=False)
+ax1.plot(time, x_error[:, 9])
+ax1.set_title('EKF velocity error LLOsat in x-direction')
+ax1.set_xlabel('Time [days]')
+ax1.set_ylabel('velocity error [m/s]')
+ax2.plot(time, x_error[:, 10])
+ax2.set_title('EKF velocity error LLOsat in y-direction')
+ax2.set_xlabel('Time [days]')
+ax2.set_ylabel('velocity error [m/s]')
+ax3.plot(time, x_error[:, 11])
+ax3.set_title('EKF velocity error LLOsat in z-direction')
+ax3.set_xlabel('Time [days]')
+ax3.set_ylabel('velocity error [m/s]')
 
 plt.figure()
-plt.plot(time, xk_hat[:, 0])
+plt.plot(time, y_diff)
+
+
+
+
+
+
 
 
 
