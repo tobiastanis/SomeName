@@ -99,11 +99,12 @@ for i in range(len(time)):
     x_k1_k1 = xk
 
 
+
 xk_hat = np.array(xk_hat)
 X_ekf = np.array(X_ekf)
 
 plt.figure()
-plt.plot(time[0:100], xk_hat[0:100, 0])
+plt.plot(time[0:10], xk_hat[0:10, 0])
 
 
 
