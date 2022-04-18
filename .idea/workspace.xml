@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a0acce4-29d2-43b0-af26-5dd259e9a5ca" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/EKF_testfile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EKF.py" beforeDir="false" afterPath="$PROJECT_DIR$/EKF.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EKF_formulas_and_input.py" beforeDir="false" afterPath="$PROJECT_DIR$/EKF_formulas_and_input.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Measurement_Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Measurement_Model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EKF_testfile.py" beforeDir="false" afterPath="$PROJECT_DIR$/EKF_testfile.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
