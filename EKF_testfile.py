@@ -23,7 +23,7 @@ X_LLO_ref = Dynamic_Model.states_LLOsat
 # True initial states (reference trajectory)
 X0 = np.concatenate((X_LUMIO_ref, X_LLO_ref), axis=1)
 # Error over all nominal states
-x_error = np.array([100, 100, 100, 0.001, 0.001, 0.001, 100, 100, 100, 0.0005, 0.0005, 0.0005])
+x_error = np.array([500, 500, 500, 0.001, 0.001, 0.001, 100, 100, 100, 0.0005, 0.0005, 0.0005])
 # Nominal states
 X_est = []
 for i in range(len(time)):
@@ -72,7 +72,7 @@ X_ekf = []
 for i in range(len(time)):
     count = i
     print(count)
-    Xk_1 = Xk
+    Xstar_k_1 = np.transpose([X_est[i, :]])
     Y_ref = Y_star[i]
     Phi = ekf.Phi(i)
     # Updating X
@@ -90,10 +90,10 @@ for i in range(len(time)):
     Pk = np.matmul(np.subtract(I,(K*H)),P_hat)
     # Computing xk and Xstar_new
     xk = np.add(x_k1_k,(K*(y - np.matmul(H,x_k1_k)[0])))
-    Xk = np.add(Xk_1, xk)
+    Xstar_k = np.add(Xstar_k_1, xk)
     # Savings
     xk_hat.append(xk)
-    X_ekf.append(Xk)
+    X_ekf.append(Xstar_k)
     # Measurement update
     P_k1_k1 = Pk
     x_k1_k1 = xk
@@ -104,7 +104,7 @@ xk_hat = np.array(xk_hat)
 X_ekf = np.array(X_ekf)
 
 plt.figure()
-plt.plot(time[0:10], xk_hat[0:10, 0])
+plt.plot(time, xk_hat[:, 0])
 
 
 
