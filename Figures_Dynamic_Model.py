@@ -141,4 +141,20 @@ plt.ylabel('Acceleration [m/$s^{2}$]')
 plt.legend(['SRP', 'Earth point mass', '$J_{12,12}$ Moon', 'Sun point mass', 'Mercury point mass', 'Venus point mass',
             'Mars point mass', 'Jupiter point mass', 'Saturn point mass', 'Uranus point mass', 'Neptune point mass']
            , loc='upper left', bbox_to_anchor=(1, 1))
+
+
+plt.figure()
+plt.plot(time, np.linalg.norm(x_llosat_moon[:, 3:6], axis=1))
+
+plt.figure()
+plt.plot(output[:, 28], output[:, 30], color='orange')
+plt.plot(0, 0, marker='o', markersize=7, color='grey')
+plt.plot(output[0, 28], output[0, 30], marker='o', markersize=3, color='orange')
+
+
+
+
 plt.show()
+
+print('max', max(np.linalg.norm(x_llosat_moon[:, 3:6], axis=1)))
+print('min', min(np.linalg.norm(x_llosat_moon[:, 3:6], axis=1)))

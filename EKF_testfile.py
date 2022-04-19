@@ -22,7 +22,7 @@ X_LLO_ref = Dynamic_Model.states_LLOsat
 # True initial states (reference trajectory)
 X0 = np.concatenate((X_LUMIO_ref, X_LLO_ref), axis=1)
 # Error over all nominal states
-x_error = np.array([300, 300, 300, 0.001, 0.001, 0.001, 100, 100, 100, 0.0005, 0.0005, 0.0005])
+x_error = np.array([500, 500, 500, 0.001, 0.001, 0.001, 200, 200, 200, 0.0005, 0.0005, 0.0005])
 # Nominal states
 X_est = []
 for i in range(len(time)):
@@ -52,6 +52,7 @@ Q = np.diagflat([[np.random.normal(0,0.02), np.random.normal(0,0.02), np.random.
                   np.random.normal(0,0.02), np.random.normal(0,0.02), np.random.normal(0,0.02)]])
 # Defining R
 R = np.random.normal(0,0.01)
+
 # Initializing
 #x_k1_k1 = np.transpose([X_initial_estimated])
 P_k1_k1 = P0
@@ -82,7 +83,9 @@ for i in range(len(time)):
     # Computing covariance matrix
     Pk = np.matmul(np.subtract(I,(K*H)),P_hat)
     # Computing xk and Xstar_new
-    xk = np.add(x_k1_k,(K*(y - np.matmul(H,x_k1_k)[0])))
+    #xk = np.add(x_k1_k,(K*(y - np.matmul(H,x_k1_k)[0])))
+    print(K)
+    xk = K*y
     Xstar_k = np.add(Xstar_k_1, xk)
     # Savings
     xk_hat.append(xk)
@@ -154,8 +157,9 @@ ax3.set_ylabel('velocity error [m/s]')
 
 plt.figure()
 plt.plot(time, y_diff)
-
-
+plt.title('Measurement difference in y')
+plt.xlabel('Time [days]')
+plt.ylabel('Measurement difference [m]')
 
 
 
