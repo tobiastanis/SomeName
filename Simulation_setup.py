@@ -34,5 +34,6 @@ reference_area_radiation_LUMIO = 0.410644     # Total radiating area (002_LUMIO.
 radiation_pressure_coefficient_LUMIO = 1.08   # From thesis stefano send
 occulting_bodies_LUMIO = ["Moon", "Earth"]
 
+
 print("[Simulation_setup.py] ran successfully \n")
 

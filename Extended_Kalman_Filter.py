@@ -11,6 +11,7 @@ import EKF_integrator
 import Measurement_Model
 import Simulation_setup
 import LLO_initial_states
+from Dynamic_Model import states
 #Time
 time = Simulation_setup.simulation_span
 dt = Simulation_setup.fixed_time_step
@@ -78,10 +79,87 @@ for i in range(len(time)-1):
     # State update X_hat_k
     Xhat_k = np.add(Xstar_k,(K*y))
     # Savings
-    X_ekf.append(Xhat_k)
+    X_ekf.append(np.transpose(Xhat_k)[0])
     y_ekf.append(y)
     P_ekf.append(Pk)
-    #
 
-    print(Xhat_k)
-    quit()
+
+X_ekf = np.vstack((np.transpose(X0)[0], X_ekf))
+print(X0)
+print(len(states), states[0, :])
+print(len(X_ekf), X_ekf[0, :])
+
+x_error = []
+for i in range(len(time)):
+    row = np.subtract(states[i,:], np.transpose(X_ekf[i,:])[0])
+    x_error.append(row)
+x_error = np.array(x_error)
+y_diff = np.array(y_ekf)
+
+
+fig1, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True, sharey=False)
+ax1.plot(time, x_error[:, 0])
+ax1.set_title('EKF position error LUMIO in x-direction')
+ax1.set_xlabel('Time [days]')
+ax1.set_ylabel('Position error [m]')
+ax2.plot(time, x_error[:, 1])
+ax2.set_title('EKF position error LUMIO in y-direction')
+ax2.set_xlabel('Time [days]')
+ax2.set_ylabel('Position error [m]')
+ax3.plot(time, x_error[:, 2])
+ax3.set_title('EKF position error LUMIO in z-direction')
+ax3.set_xlabel('Time [days]')
+ax3.set_ylabel('Position error [m]')
+
+fig2, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True, sharey=False)
+ax1.plot(time, x_error[:, 6])
+ax1.set_title('EKF position error LLOsat in x-direction')
+ax1.set_xlabel('Time [days]')
+ax1.set_ylabel('Position error [m]')
+ax2.plot(time, x_error[:, 7])
+ax2.set_title('EKF position error LLOsat in y-direction')
+ax2.set_xlabel('Time [days]')
+ax2.set_ylabel('Position error [m]')
+ax3.plot(time, x_error[:, 8])
+ax3.set_title('EKF position error LLOsat in z-direction')
+ax3.set_xlabel('Time [days]')
+ax3.set_ylabel('Position error [m]')
+
+fig3, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True, sharey=False)
+ax1.plot(time, x_error[:, 3])
+ax1.set_title('EKF velocity error LUMIO in x-direction')
+ax1.set_xlabel('Time [days]')
+ax1.set_ylabel('velocity error [m/s]')
+ax2.plot(time, x_error[:, 4])
+ax2.set_title('EKF velocity error LUMIO in y-direction')
+ax2.set_xlabel('Time [days]')
+ax2.set_ylabel('velocity error [m/s]')
+ax3.plot(time, x_error[:, 5])
+ax3.set_title('EKF velocity error LUMIO in z-direction')
+ax3.set_xlabel('Time [days]')
+ax3.set_ylabel('velocity error [m/s]')
+
+fig4, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True, sharey=False)
+ax1.plot(time, x_error[:, 9])
+ax1.set_title('EKF velocity error LLOsat in x-direction')
+ax1.set_xlabel('Time [days]')
+ax1.set_ylabel('velocity error [m/s]')
+ax2.plot(time, x_error[:, 10])
+ax2.set_title('EKF velocity error LLOsat in y-direction')
+ax2.set_xlabel('Time [days]')
+ax2.set_ylabel('velocity error [m/s]')
+ax3.plot(time, x_error[:, 11])
+ax3.set_title('EKF velocity error LLOsat in z-direction')
+ax3.set_xlabel('Time [days]')
+ax3.set_ylabel('velocity error [m/s]')
+
+
+
+
+
+
+
+
+
+
+plt.show()
