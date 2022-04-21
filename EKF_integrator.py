@@ -97,6 +97,11 @@ def state_integrator(t, dt, X):
         "LLOsat": acceleration_settings_LLOsat
     }
 
+    #obtaining relative position vector
+    dependent_variables_to_save = [
+    propagation_setup.dependent_variable.relative_position("LUMIO", "LLOsat")
+    ]
+
     acceleration_models = propagation_setup.create_acceleration_models(
         body_system, acceleration_settings, bodies_to_propagate, central_bodies)
     ### Propagating ###
@@ -107,6 +112,7 @@ def state_integrator(t, dt, X):
         bodies_to_propagate,
         initial_states,
         termination_condition,
+        output_variables=dependent_variables_to_save
     )
 
     ### Integrating ###
@@ -118,10 +124,13 @@ def state_integrator(t, dt, X):
     dynamic_simulator = numerical_simulation.SingleArcSimulator(
         body_system, integrator_settings, propagation_settings
     )
-
+    output_dict = dynamic_simulator.dependent_variable_history
+    relative_position_vector = output_dict[t+dt]
+    norm_relative_position_vector = np.linalg.norm(relative_position_vector)
     states = np.transpose([dynamic_simulator.state_history[simulation_end_epoch]])
 
-    return states
+
+    return [states, norm_relative_position_vector]
 
 def Phi_integrator_LUMIO(t, dt, X):
     simulation_start_epoch = t

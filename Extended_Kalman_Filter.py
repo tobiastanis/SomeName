@@ -38,7 +38,7 @@ Q = np.diag([0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5])
 R = np.random.normal(0, 0.01)**2
 
 # Initializing
-P_k1_k1 = P0
+Pk = P0
 Xhat_k = X0
 I = np.eye(12, dtype=int)
 Phi_k1_k1 = I
@@ -48,24 +48,40 @@ X_ekf = []
 y_ekf = []
 P_ekf = []
 
-for i in range(len(time)):
+for i in range(len(time)-1):
     count = i
     print(count)
     ET_k_1 = ephemeris_time[i]
-    # obtaining t = k-1
+    # Obtaining input for t = k-1
     Xstar_k_1 = Xhat_k
-    Y = Y_nominal[i]
-    P_k1_k1 = P0
-
+    Yk = Y_nominal[i+1]
+    P_k1_k1 = Pk
     # Inegrating Xstar_k_1 to Xstar_k
-    Xstar_k = EKF_integrator.state_integrator(ET_k_1, dt, Xstar_k_1)
+    [Xstar_k, Y_ref] = EKF_integrator.state_integrator(ET_k_1, dt, Xstar_k_1)
     # Integrating Phi
     Phi_LUMIO = EKF_integrator.Phi_integrator_LUMIO(ET_k_1, dt, Xstar_k_1)
     Phi_LLOsat = EKF_integrator.Phi_integrator_LLOsat(ET_k_1, dt, Xstar_k_1)
     Phi_top = np.concatenate((Phi_LUMIO, np.zeros((6,6))), axis=1)
     Phi_bot = np.concatenate((np.zeros((6,6)), Phi_LLOsat), axis=1)
     Phi = np.concatenate((Phi_top, Phi_bot), axis=0)
-    
 
-    print(Phi)
+    # Updating P_k1_k1 to P_flat_k
+    P_flat_k = np.add(np.matmul(np.matmul(Phi, P_k1_k1), np.transpose(Phi)), Q)
+    # Computing G(X,tk), called Y_Ref
+    y = Yk - Y_ref
+    # Defining H
+    H = ekf.H_range_2sat_simulation(Xstar_k)
+    # Computing the Kalman gain
+    K = np.matmul(P_flat_k, np.transpose([H])) * (np.matmul(np.matmul(H, P_flat_k), np.transpose(H)) + R) ** -1
+    # Computing covariance matrix
+    Pk = np.matmul(np.subtract(I, (K * H)), P_flat_k)
+    # State update X_hat_k
+    Xhat_k = np.add(Xstar_k,(K*y))
+    # Savings
+    X_ekf.append(Xhat_k)
+    y_ekf.append(y)
+    P_ekf.append(Pk)
+    #
+
+    print(Xhat_k)
     quit()

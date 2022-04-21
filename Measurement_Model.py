@@ -3,9 +3,7 @@ Measurement Model
 """
 import numpy as np
 from Dynamic_Model import relative_position_vector
-from Dynamic_Model import relative_velocity_vector
-from Dynamic_Model import states_LUMIO
-from Dynamic_Model import states_LLOsat
+
 
 norm_position_vector = np.linalg.norm(relative_position_vector, axis=1)
 sigma_noise = np.random.normal(0, 1, len(norm_position_vector))
