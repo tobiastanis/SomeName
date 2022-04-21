@@ -49,6 +49,8 @@ y_ekf = []
 P_ekf = []
 
 for i in range(len(time)):
+    count = i
+    print(count)
     ET_k_1 = ephemeris_time[i]
     # obtaining t = k-1
     Xstar_k_1 = Xhat_k
@@ -57,6 +59,13 @@ for i in range(len(time)):
 
     # Inegrating Xstar_k_1 to Xstar_k
     Xstar_k = EKF_integrator.state_integrator(ET_k_1, dt, Xstar_k_1)
-    print(Xstar_k_1)
-    print(Xstar_k)
+    # Integrating Phi
+    Phi_LUMIO = EKF_integrator.Phi_integrator_LUMIO(ET_k_1, dt, Xstar_k_1)
+    Phi_LLOsat = EKF_integrator.Phi_integrator_LLOsat(ET_k_1, dt, Xstar_k_1)
+    Phi_top = np.concatenate((Phi_LUMIO, np.zeros((6,6))), axis=1)
+    Phi_bot = np.concatenate((np.zeros((6,6)), Phi_LLOsat), axis=1)
+    Phi = np.concatenate((Phi_top, Phi_bot), axis=0)
+    
+
+    print(Phi)
     quit()
