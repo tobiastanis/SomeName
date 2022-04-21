@@ -22,7 +22,7 @@ X_LLO_ref = Dynamic_Model.states_LLOsat
 # True initial states (reference trajectory)
 X0 = np.concatenate((X_LUMIO_ref, X_LLO_ref), axis=1)
 # Error over all nominal states
-x_error = np.array([500, 500, 500, 0.001, 0.001, 0.001, 200, 200, 200, 0.0005, 0.0005, 0.0005])
+x_error = np.array([100, 100, 100, 6e-4, 6e-4, 6e-4, 10, 10, 10, 6e-5, 6e-5, 6e-5])
 # Nominal states
 X_est = []
 for i in range(len(time)):
@@ -56,47 +56,53 @@ R = np.random.normal(0,0.01)
 # Initializing
 #x_k1_k1 = np.transpose([X_initial_estimated])
 P_k1_k1 = P0
-#x_k1_k1 = np.transpose([X_est[0,:]])
-x_k1_k1 = np.transpose([x_error])
+X_hat_k = np.transpose([X_est[0,:]])
+#x_k1_k1 = np.transpose([x_error])
 I = np.eye(12, dtype=int)
 
-xk_hat = []
 X_ekf = []
 y_diff = []
 for i in range(len(time)):
     count = i
-    print(count)
-    Xstar_k_1 = np.transpose([X_est[i, :]])
+    #print(count)
+    #Xstar_k_1 = np.transpose([X_est[i, :]])
+    Xstar_k_1 = X_hat_k
     Y_ref = Y_star[i]
     Phi = ekf.Phi(i)
     # Updating X
-    x_k1_k = np.matmul(Phi,x_k1_k1)
-    # Upating P_k1_k1 to P_flat_k
+    #x_k1_k = np.matmul(Phi,x_k1_k1)
+    Xstar_k = np.matmul(Phi,Xstar_k_1)
+    #Xstar_k = Xstar_k_1
+    # Updating P_k1_k1 to P_flat_k
     P_hat = np.add(np.matmul(np.matmul(Phi, P_k1_k1), np.transpose(Phi)), Q)
     # Obtaining Y from x_k1_k and defining y
-    Y = ekf.Y(Xstar_k_1)[0]
-    y = Y - Y_ref
+    Y = ekf.Y(Xstar_k)[0]
+    y = Y_ref - Y
     # Defining H
-    H = ekf.H_range_2sat_simulation(Xstar_k_1)
+    H = ekf.H_range_2sat_simulation(Xstar_k)
     # Computing the Kalman gain
-    K = np.matmul(P_hat,np.transpose([H]))*(np.matmul(np.matmul(H,P_hat), np.transpose(H)) - R)**-1
+    K = np.matmul(P_hat,np.transpose([H]))*(np.matmul(np.matmul(H,P_hat), np.transpose(H)) + R)**-1
     # Computing covariance matrix
     Pk = np.matmul(np.subtract(I,(K*H)),P_hat)
     # Computing xk and Xstar_new
     #xk = np.add(x_k1_k,(K*(y - np.matmul(H,x_k1_k)[0])))
-    print(K)
-    xk = K*y
-    Xstar_k = np.add(Xstar_k_1, xk)
+    X_hat_k = np.add(Xstar_k,(K*y))
+    #xk = K*y
+    #Xstar_k = np.add(Xstar_k_1, xk)
     # Savings
-    xk_hat.append(xk)
-    X_ekf.append(Xstar_k)
+    X_ekf.append(X_hat_k)
+    #X_ekf.append(Xstar_k)
     y_diff.append(y)
     # Measurement update
     P_k1_k1 = Pk
-    x_k1_k1 = xk
+    #x_k1_k1 = xk
 
-x_error = np.array(xk_hat)
 X_ekf = np.array(X_ekf)
+x_error = []
+for i in range(len(time)):
+    row = np.subtract(X_est[i,:], np.transpose(X_ekf[i,:])[0])
+    x_error.append(row)
+x_error = np.array(x_error)
 y_diff = np.array(y_diff)
 
 fig1, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True, sharey=False)
