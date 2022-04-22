@@ -228,7 +228,6 @@ output_dict = dynamic_simulator.dependent_variable_history
 states_dict = dynamic_simulator.state_history
 output = np.vstack(list(output_dict.values()))
 states = np.vstack(list(states_dict.values()))
-
 states_LUMIO = states[:, 0:6]
 states_LLOsat = states[:, 6:12]
 relative_position_vector = output[:, 37:40]

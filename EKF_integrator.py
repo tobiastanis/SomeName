@@ -81,6 +81,7 @@ def state_integrator(t, dt, X):
     acceleration_settings_LLOsat = dict(
         Earth=[propagation_setup.acceleration.point_mass_gravity()],
         Moon=[propagation_setup.acceleration.spherical_harmonic_gravity(12, 12)],
+        #Moon=[propagation_setup.acceleration.point_mass_gravity()],
         Sun=[propagation_setup.acceleration.point_mass_gravity(),
              propagation_setup.acceleration.cannonball_radiation_pressure()],
         Mercury=[propagation_setup.acceleration.point_mass_gravity()],
@@ -214,7 +215,6 @@ def Phi_integrator_LUMIO(t, dt, X):
     parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Uranus"))
     parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Neptune"))
 
-
     variational_equations_solver = numerical_simulation.SingleArcVariationalSimulator(
         body_system, integrator_settings, propagation_settings,
         estimation_setup.create_parameters_to_estimate(parameter_settings, body_system), integrate_on_creation=1
@@ -265,6 +265,7 @@ def Phi_integrator_LLOsat(t, dt, X):
 
     acceleration_settings_LLOsat = dict(
         Earth=[propagation_setup.acceleration.point_mass_gravity()],
+        #Moon=[propagation_setup.acceleration.point_mass_gravity()],
         Moon=[propagation_setup.acceleration.spherical_harmonic_gravity(12, 12)],
         Sun=[propagation_setup.acceleration.point_mass_gravity(),
              propagation_setup.acceleration.cannonball_radiation_pressure()],

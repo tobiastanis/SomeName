@@ -15,13 +15,12 @@ t1_mjd = 60418.00           # 18-04-2024 Next few days no stationkeeping
 tend_mjd = 60755.00         # End of life time 21-03-2025
 t2_mjd = 59914.00           # comparison time for paper NaviMoon
 
-simulation_time = 10           ####### Simulation time in days
+simulation_time = 9           ####### Simulation time in days
 # simulation start epoch gives the time in seconds from 01-01-2000 00:00, which is used to define celestial positions
 simulation_start_epoch = Dataset_reader.simulation_start_epoch(t0_mjd)
 simulation_end_epoch = simulation_start_epoch+simulation_time*constants.JULIAN_DAY
 
-fixed_time_step = 0.005*constants.JULIAN_DAY
-
+fixed_time_step = 0.001*constants.JULIAN_DAY
 n_steps = math.floor((simulation_end_epoch-simulation_start_epoch)/fixed_time_step)+1
 simulation_span = np.linspace(0, simulation_time, n_steps)
 

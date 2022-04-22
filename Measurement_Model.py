@@ -2,13 +2,19 @@
 Measurement Model
 """
 import numpy as np
-from Dynamic_Model import relative_position_vector
+import Dynamic_Model_Earth_based
+import EKF_formulas_and_input as ekf
 
+states = Dynamic_Model_Earth_based.states
+intersatellite_distance = []
+for i in range(len(states)):
+    Y = ekf.Y(states[i])
+    intersatellite_distance.append(Y)
+intersatellite_distance = np.array(intersatellite_distance)
 
-norm_position_vector = np.linalg.norm(relative_position_vector, axis=1)
-sigma_noise = np.random.normal(0, 1, len(norm_position_vector))
+sigma_noise = np.random.normal(0, 3, len(intersatellite_distance))
 #Defining the observation array
-observations_array = np.add(norm_position_vector, sigma_noise)
+observations_array = np.add(intersatellite_distance, sigma_noise)
 
 ### From 38_lumiopowerdistr.dpf
 # inter-satellite downlink budget assumptions
