@@ -22,7 +22,7 @@ ephemeris_time = Simulation_setup.ephemeris_time_span
 LUMIO_ini = Simulation_setup.LUMIO_initial_states
 Pathfinder_ini = initial_state_pathfinder_earth
 X0_nominal = np.concatenate((LUMIO_ini, Pathfinder_ini))
-initial_error = np.array([100, 100, 100, 6e-4, 6e-4, 6e-4, 10, 10, 10, 6e-5, 6e-5, 6e-5])
+initial_error = np.array([500, 500, 500, 1e-3, 1e-3, 1e-3, 500, 500, 500, 1e-3, 1e-3, 1e-3])
 X0 = np.transpose([np.add(X0_nominal,initial_error)])
 
 # Nominal Measurements
@@ -81,6 +81,7 @@ for i in range(len(time)-1):
     X_ekf.append(np.transpose(Xhat_k)[0])
     y_ekf.append(y)
     P_ekf.append(Pk)
+    """
     print('Xstar_k_1:', Xstar_k_1)
     print('Xstar_k:', Xstar_k)
     print('Yk:', Yk)
@@ -93,17 +94,18 @@ for i in range(len(time)-1):
     print('K', K)
     print('Pk', Pk)
     print('Xhat_k', Xhat_k)
+    quit()
+    """
 
 
 X_ekf = np.vstack((np.transpose(X0)[0], X_ekf))
 
 x_error = []
 for i in range(len(time)):
-    row = np.subtract(states[i,:], np.transpose(X_ekf[i,:])[0])
+    row = np.subtract(states[i,:], X_ekf[i,:])
     x_error.append(row)
 x_error = np.array(x_error)
 y_diff = np.array(y_ekf)
-
 
 fig1, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True, sharey=False)
 ax1.plot(time, x_error[:, 0])
@@ -164,5 +166,18 @@ ax3.set_ylabel('velocity error [m/s]')
 plt.figure()
 plt.plot(np.linspace(0, 10, len(y_diff)), y_diff)
 
-
+fig4, (ax1, ax2, ax3) = plt.subplots(3, 1, constrained_layout=True, sharey=False)
+ax1.plot(states[:, 0], states[:, 1], color='orange', label='states lumio')
+ax1.plot(X_ekf[:, 0], X_ekf[:, 1], color='blue', label='states x_ekf lumio')
+ax1.plot(states[:, 6], states[:, 7], color='red', label='states pathfinder')
+ax1.plot(X_ekf[:, 6], states[:, 7], color='yellow', label='states x_ekf path')
+ax2.plot(states[:, 0], states[:, 2], color='orange', label='states lumio')
+ax2.plot(X_ekf[:, 0], X_ekf[:, 2], color='blue', label='states x_ekf lumio')
+ax2.plot(states[:, 6], states[:, 8], color='red', label='states pathfinder')
+ax2.plot(X_ekf[:, 6], states[:, 8], color='yellow', label='states x_ekf path')
+ax3.plot(states[:, 1], states[:, 2], color='orange', label='states lumio')
+ax3.plot(X_ekf[:, 1], X_ekf[:, 2], color='blue', label='states x_ekf lumio')
+ax3.plot(states[:, 7], states[:, 8], color='red', label='states pathfinder')
+ax3.plot(X_ekf[:, 7], states[:, 8], color='yellow', label='states x_ekf path')
+plt.legend()
 plt.show()
