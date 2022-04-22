@@ -129,7 +129,6 @@ def state_integrator(t, dt, X):
     norm_relative_position_vector = np.linalg.norm(relative_position_vector)
     states = np.transpose([dynamic_simulator.state_history[simulation_end_epoch]])
 
-
     return [states, norm_relative_position_vector]
 
 def Phi_integrator_LUMIO(t, dt, X):
@@ -235,7 +234,7 @@ def Phi_integrator_LUMIO(t, dt, X):
 
 def Phi_integrator_LLOsat(t, dt, X):
     simulation_start_epoch = t
-    simulation_end_epoch = t + 3*dt
+    simulation_end_epoch = t + dt
     fixed_time_step = dt
     initial_states = np.transpose(X[6:12])[0]
 
@@ -335,5 +334,4 @@ def Phi_integrator_LLOsat(t, dt, X):
     )
 
     state_transition_matrices_llosat = variational_equations_solver.state_transition_matrix_history
-
     return state_transition_matrices_llosat[t+dt]

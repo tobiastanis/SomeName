@@ -28,22 +28,18 @@ X0 = np.transpose([np.add(X0_nominal,initial_error)])
 Y_nominal = Measurement_Model.observations_array
 
 # Initial covariance matrix
-P0 = np.diag([np.random.normal(0,0.01), np.random.normal(0,0.01), np.random.normal(0,0.01), np.random.normal(0,0.01),
-           np.random.normal(0,0.01), np.random.normal(0,0.01), np.random.normal(0,0.01), np.random.normal(0,0.01),
-           np.random.normal(0,0.01), np.random.normal(0,0.01), np.random.normal(0,0.01), np.random.normal(0,0.01)])
+P0 = 10*np.diag((initial_error))
 
 # State compensation matrix Q
-Q = np.diag([0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5])
-
+#Q = np.diag([0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5])
+Q = np.zeros((12,12))
 # Defining weighting observations R
-R = np.random.normal(0, 0.01)**2
+R = 1**2
 
 # Initializing
 Pk = P0
 Xhat_k = X0
 I = np.eye(12, dtype=int)
-Phi_k1_k1 = I
-
 
 X_ekf = []
 y_ekf = []
@@ -59,6 +55,7 @@ for i in range(len(time)-1):
     P_k1_k1 = Pk
     # Inegrating Xstar_k_1 to Xstar_k
     [Xstar_k, Y_ref] = EKF_integrator.state_integrator(ET_k_1, dt, Xstar_k_1)
+
     # Integrating Phi
     Phi_LUMIO = EKF_integrator.Phi_integrator_LUMIO(ET_k_1, dt, Xstar_k_1)
     Phi_LLOsat = EKF_integrator.Phi_integrator_LLOsat(ET_k_1, dt, Xstar_k_1)
@@ -85,9 +82,6 @@ for i in range(len(time)-1):
 
 
 X_ekf = np.vstack((np.transpose(X0)[0], X_ekf))
-print(X0)
-print(len(states), states[0, :])
-print(len(X_ekf), X_ekf[0, :])
 
 x_error = []
 for i in range(len(time)):
@@ -153,7 +147,8 @@ ax3.set_title('EKF velocity error LLOsat in z-direction')
 ax3.set_xlabel('Time [days]')
 ax3.set_ylabel('velocity error [m/s]')
 
-
+plt.figure()
+plt.plot(np.linspace(0, 10, len(y_diff)), y_diff)
 
 
 

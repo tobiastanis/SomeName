@@ -14,8 +14,6 @@ def H_range_2sat_simulation(X):
     return np.array([(x1-x2)/rho_abs, (y1-y2)/rho_abs, (z1-z2)/rho_abs, 0, 0, 0, (-x1+x2)/rho_abs, (-y1+y2)/rho_abs,
                      (-z1+z2)/rho_abs, 0, 0, 0])
 
-
-
 def Phi(i):
     t_ET = State_Transition_Matrix_LUMIO.ephemeris_time_span
     zero_room = np.zeros((6,6))

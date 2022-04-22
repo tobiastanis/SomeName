@@ -21,6 +21,7 @@ simulation_start_epoch = Dataset_reader.simulation_start_epoch(t0_mjd)
 simulation_end_epoch = simulation_start_epoch+simulation_time*constants.JULIAN_DAY
 
 fixed_time_step = 0.005*constants.JULIAN_DAY
+
 n_steps = math.floor((simulation_end_epoch-simulation_start_epoch)/fixed_time_step)+1
 simulation_span = np.linspace(0, simulation_time, n_steps)
 
