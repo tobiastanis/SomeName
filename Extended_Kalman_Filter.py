@@ -10,8 +10,9 @@ import EKF_formulas_and_input as ekf
 import EKF_integrator
 import Measurement_Model
 import Simulation_setup
-import LLO_initial_states
-from Dynamic_Model import states
+from LLO_initial_states import initial_state_pathfinder_earth
+from Dynamic_Model_Earth_based import states
+
 #Time
 time = Simulation_setup.simulation_span
 dt = Simulation_setup.fixed_time_step
@@ -19,7 +20,7 @@ ephemeris_time = Simulation_setup.ephemeris_time_span
 
 # Initial States - LUMIO is wrt Earth and Pathfinder is wrt Moon
 LUMIO_ini = Simulation_setup.LUMIO_initial_states
-Pathfinder_ini = LLO_initial_states.initial_state_pathfinder
+Pathfinder_ini = initial_state_pathfinder_earth
 X0_nominal = np.concatenate((LUMIO_ini, Pathfinder_ini))
 initial_error = np.array([100, 100, 100, 6e-4, 6e-4, 6e-4, 10, 10, 10, 6e-5, 6e-5, 6e-5])
 X0 = np.transpose([np.add(X0_nominal,initial_error)])
@@ -54,8 +55,9 @@ for i in range(len(time)-1):
     Yk = Y_nominal[i+1]
     P_k1_k1 = Pk
     # Inegrating Xstar_k_1 to Xstar_k
-    [Xstar_k, Y_ref] = EKF_integrator.state_integrator(ET_k_1, dt, Xstar_k_1)
-
+    Xstar_k = EKF_integrator.state_integrator(ET_k_1, dt, Xstar_k_1)
+    # Obtaining Y_ref
+    Y_ref = ekf.Y(Xstar_k)
     # Integrating Phi
     Phi_LUMIO = EKF_integrator.Phi_integrator_LUMIO(ET_k_1, dt, Xstar_k_1)
     Phi_LLOsat = EKF_integrator.Phi_integrator_LLOsat(ET_k_1, dt, Xstar_k_1)
@@ -79,6 +81,18 @@ for i in range(len(time)-1):
     X_ekf.append(np.transpose(Xhat_k)[0])
     y_ekf.append(y)
     P_ekf.append(Pk)
+    print('Xstar_k_1:', Xstar_k_1)
+    print('Xstar_k:', Xstar_k)
+    print('Yk:', Yk)
+    print('Pk1_k1:', P_k1_k1)
+    print('Philumio:', Phi_LUMIO)
+    print('Phillosat:', Phi_LLOsat)
+    print('Pflat_k', P_flat_k)
+    print('H', H)
+    print('y', y)
+    print('K', K)
+    print('Pk', Pk)
+    print('Xhat_k', Xhat_k)
 
 
 X_ekf = np.vstack((np.transpose(X0)[0], X_ekf))
@@ -149,12 +163,6 @@ ax3.set_ylabel('velocity error [m/s]')
 
 plt.figure()
 plt.plot(np.linspace(0, 10, len(y_diff)), y_diff)
-
-
-
-
-
-
 
 
 plt.show()
