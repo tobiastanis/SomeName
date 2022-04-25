@@ -3,12 +3,12 @@ Measurement Model
 """
 import numpy as np
 import Nominal_Simulation
-import EKF_formulas_and_input as ekf
+import functions_ekf
 
 states = Nominal_Simulation.states
 intersatellite_distance = []
 for i in range(len(states)):
-    Y = ekf.Y(states[i])
+    Y = functions_ekf.Y(states[i])
     intersatellite_distance.append(Y)
 intersatellite_distance = np.array(intersatellite_distance)
 

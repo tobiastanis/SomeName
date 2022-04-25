@@ -4,12 +4,14 @@ Extended Kalman Filter, at this stage only ranging is taken into account
 #own libraries
 import Nominal_Simulation
 import Measurement_Model
+import csv_files
 #function_files
 import nominal_simulators
 import phi_calculator
 import functions_ekf
 #general libraries
 import numpy as np
+import csv
 #tudatpy libraries
 
 # Initializing time
@@ -29,7 +31,7 @@ Y_nominal = Measurement_Model.observations_array
 P0 = 10*np.diag((estimated_initial_errors))
 
 # State Compensation Matrix
-Qc = np.eye(6)*[1, 1, 1 , 0.1, 0.1, 0.1]*5e-19
+Qc = np.eye(6)*[0.1, 1, 1 , 0.1, 0.1, 0.1]*5e-12
 RR1 = np.concatenate((dt**2/2*np.eye(3), np.zeros((3,3))), axis=1)
 RR2 = np.concatenate((dt*np.eye(3), np.zeros((3,3))), axis=1)
 RR3 = np.concatenate((np.zeros((3,3)), dt**2/2*np.eye(3)), axis=1)
@@ -101,9 +103,9 @@ for i in range(len(ephemeris_time)):
 x_error = np.array(x_error)
 y_diff = np.array(y_ekf)
 
+
 import matplotlib.pyplot as plt
 t = Nominal_Simulation.simulation_span
-
 
 plt.figure()
 plt.plot(t, x_error[:, 0], color='red', label='x')
@@ -166,3 +168,5 @@ plt.ylabel('Estimated velocity error [m]')
 plt.title('ELO velocity error')
 
 plt.show()
+
+array_to_save = np.concatenate((np.concatenate((np.concatenate((np.transpose([ephemeris_time]), true_states), axis=1), X_ekf), axis=1), std_Pk_ekf), axis=1)
