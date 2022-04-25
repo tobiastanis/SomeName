@@ -50,8 +50,4 @@ X_Moon = states_obtainer.moon_ephemeris(simulation_start_epoch, simulation_end_e
     savings=1
 )
 
-import matplotlib.pyplot as plt
-
-
-
 print('Finished running Nominal Simulations')
