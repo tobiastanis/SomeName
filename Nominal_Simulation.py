@@ -4,26 +4,15 @@ and then the satellites are propagated based on the simulation set-up. Note that
 sates automatically change using the states_obtainer
 """
 #import own libraries
-from Satellites import EML2
-from Satellites import ELO
 import states_obtainer
-from Simulation_Models import Nominal_Simulation_Models
+import Nominal_Simulators
 #import general libraries
 import math
 import numpy as np
-from datetime import datetime
 #import tudatpy libraries
 from tudatpy.kernel import constants
-from tudatpy.kernel import numerical_simulation
-from tudatpy.kernel.interface import spice_interface
-from tudatpy.kernel.numerical_simulation import environment_setup
-from tudatpy.kernel.numerical_simulation import propagation_setup
-from tudatpy.kernel.numerical_simulation import estimation_setup
 
-## Loading SPICE kernels
-spice_interface.load_standard_kernels()
 # Measuring dynamic model runtime
-starttime = datetime.now()
 print('Running [Nominal_Simulation.py]')
 
 #### Simulation set_up ####
@@ -52,7 +41,8 @@ initial_states = np.vstack([EML2_initial.reshape(-1,1), ELO_initial.reshape(-1,1
 # Saving trajectory Moon from ephemeris
 X_Moon = states_obtainer.moon_ephemeris(simulation_start_epoch, simulation_end_epoch, n_steps)
 
-[states, output] = Nominal_Simulation_Models.higherfidelity_model(
+# Simulating nominal simulation
+[states, output] = Nominal_Simulators.higherfidelity_model(
     simulation_start_epoch,
     fixed_time_step,
     simulation_end_epoch,
@@ -60,4 +50,8 @@ X_Moon = states_obtainer.moon_ephemeris(simulation_start_epoch, simulation_end_e
     savings=1
 )
 
+import matplotlib.pyplot as plt
 
+
+
+print('Finished running Nominal Simulations')

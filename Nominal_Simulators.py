@@ -24,7 +24,7 @@ highfidelity_model:
     ELO: SRP, spherical harmonic gravity Moon 12,12 and pointmasses Sun, Earth, Jupiter
 """
 def higherfidelity_model(t0, dt, tend, X, savings):
-    print("starting highfidelity_model")
+    print("starting higherfidelity_model")
     simulation_start_epoch = t0
     simulation_end_epoch = tend
     fixed_time_step = dt
@@ -216,7 +216,7 @@ def higherfidelity_model(t0, dt, tend, X, savings):
 
     states_dict = dynamic_simulator.state_history
     states = np.vstack(list(states_dict.values()))
-    print('Finished highfidelity_model')
+    print('finished higherfidelity_model')
     if savings == 1:
         output_dict = dynamic_simulator.dependent_variable_history
         output = np.vstack(list(output_dict.values()))
@@ -386,7 +386,7 @@ def highfidelity_model(t0, dt, tend, X, savings):
 
     states_dict = dynamic_simulator.state_history
     states = np.vstack(list(states_dict.values()))
-    print('Finished highfidelity_model')
+    print('finished highfidelity_model')
     if savings == 1:
         output_dict = dynamic_simulator.dependent_variable_history
         output = np.vstack(list(output_dict.values()))
