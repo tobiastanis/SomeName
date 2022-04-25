@@ -5,7 +5,7 @@ sates automatically change using the states_obtainer
 """
 #import own libraries
 import states_obtainer
-import Nominal_Simulators
+import nominal_simulators
 #import general libraries
 import math
 import numpy as np
@@ -42,7 +42,7 @@ initial_states = np.vstack([EML2_initial.reshape(-1,1), ELO_initial.reshape(-1,1
 X_Moon = states_obtainer.moon_ephemeris(simulation_start_epoch, simulation_end_epoch, n_steps)
 
 # Simulating nominal simulation
-[states, output] = Nominal_Simulators.higherfidelity_model(
+[states, output] = nominal_simulators.higherfidelity_model(
     simulation_start_epoch,
     fixed_time_step,
     simulation_end_epoch,

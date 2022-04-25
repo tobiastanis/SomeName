@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a0acce4-29d2-43b0-af26-5dd259e9a5ca" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Measurement_Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Measurement_Model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Extended_Kalman_Filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/ExtendedKalmanFilter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nominal_Simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Nominal_Simulation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulation_Models/Nominal_Simulation_Models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation_Models/Nominal_Simulation_Models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nominal_Simulators.py" beforeDir="false" afterPath="$PROJECT_DIR$/nominal_simulators.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +46,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.Nominal_Simulation">
-    <configuration name="Extended_Kalman_Filter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="ExtendedKalmanFilter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SomeName" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -59,7 +58,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Extended_Kalman_Filter.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\tobia\Documents\GitHub\SomeName\ExtendedKalmanFilter.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -176,17 +175,17 @@
     <list>
       <item itemvalue="Python.tudat_space" />
       <item itemvalue="Python.Nominal_Simulation" />
-      <item itemvalue="Python.Extended_Kalman_Filter" />
       <item itemvalue="Python.Satellites" />
       <item itemvalue="Python.Nominal_Simulation_Models" />
       <item itemvalue="Python.Measurement_Model" />
+      <item itemvalue="Python.ExtendedKalmanFilter" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.Nominal_Simulation" />
         <item itemvalue="Python.Measurement_Model" />
         <item itemvalue="Python.Nominal_Simulation_Models" />
-        <item itemvalue="Python.Extended_Kalman_Filter" />
+        <item itemvalue="Python.ExtendedKalmanFilter" />
         <item itemvalue="Python.Satellites" />
       </list>
     </recent_temporary>
