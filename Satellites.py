@@ -1,5 +1,5 @@
 """
-Class file for the satellites. May be later include ranging parameters as well.. 
+Class file for the satellites. May be later include ranging parameters as well..
 """
 
 class satellite:

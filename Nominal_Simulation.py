@@ -44,4 +44,10 @@ simulation_span = np.linspace(0, simulation_time_days, n_steps)
 simulation_span_ephemeris = np.linspace(simulation_start_epoch, simulation_end_epoch, n_steps)
 
 #### Initializing ####
+EML2_initial = states_obtainer.initial_states_eml2(simulation_start_epoch_mjd)
+ELO_initial = states_obtainer.initial_states_elo(simulation_start_epoch_mjd)
+initial_states = np.vstack([EML2_initial.reshape(-1,1), ELO_initial(-1,1)])
+
+# Saving trajectory Moon from ephemeris
+X_Moon = states_obtainer.moon_ephemeris(simulation_start_epoch, simulation_end_epoch, n_steps)
 
