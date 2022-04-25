@@ -65,12 +65,15 @@ def state_moon(t0, tend):
 def state_lumio(t0,tend):
     return np.asarray(LUMIO_dataframe.loc[(LUMIO_dataframe['MJD'] >= t0) & (LUMIO_dataframe['MJD'] <= tend)])[:, 2: 8]*10**3
 
-def initial_state(t0):
+def initial_states_eml2(t0):
     data = np.asarray(LUMIO_dataframe.loc[(LUMIO_dataframe['MJD'] == t0)])[0]
     return data[2: 8]*10**3
 
 def simulation_start_epoch(t0):
     data = np.asarray(LUMIO_dataframe.loc[(LUMIO_dataframe['MJD'] == t0)])[0]
     return np.asscalar(data[1])
+
+
+
 
 print("[Dataset_reader.py] ran successfully \n")

@@ -33,7 +33,7 @@ t1_mjd = 60418.00           # Start time at 00:00:0000 18-04-2024
 
 # EML2
 # Initial states from Dataset reader
-initial_states_EML2_20240321 = Dataset_reader.initial_state(t0_mjd)
+initial_states_EML2_20240321 = Dataset_reader.initial_states_(t0_mjd)
 initial_states_EML2_20240418 = Dataset_reader.initial_state(t1_mjd)
 # EML2's characteristics regarding mass and SRP
 mass_EML2 = 22.8           # kg
