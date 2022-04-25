@@ -5,7 +5,7 @@ meaning from date 2020-08-30 12:00:00.000 to 2026-10-12 00:00:00.000.
 Two important times at which the initial state of LUMIO are considered are at 21-03-2024 and 18-04-2024, since no
 stationkeeping is performed from then to a certain amount of days
 
-See below for function description (from line 39)
+See below for function description (from line 46)
 """
 import numpy as np
 import pandas as pd
@@ -14,7 +14,7 @@ import csv
 from tudatpy.kernel.astro import element_conversion
 from tudatpy.kernel.interface import spice_interface
 spice_interface.load_standard_kernels()
-print("Running [Dataset_reader.py]")
+print("Running [states_obtainer.py]")
 # Opening csv datasets
 LUMIO_datacsv = open('LUMIO_states.csv')
 Moon_datacsv = open('Moon_states.csv')
@@ -53,14 +53,11 @@ np.array format and state parameters are in [m]. Last is obtaining the ephemeris
 bodies
 """
 
-
 def data_moon(t0, tend):
     return Moon_dataframe.loc[(Moon_dataframe['MJD'] >= t0) & (Moon_dataframe['MJD'] <= tend)]
 
-
 def data_lumio(t0, tend):
     return LUMIO_dataframe.loc[(LUMIO_dataframe['MJD'] >= t0) & (LUMIO_dataframe['MJD'] <= tend)]
-
 
 def states_moon(t0, tend):
     return np.asarray(Moon_dataframe.loc[(Moon_dataframe['MJD'] >= t0) & (Moon_dataframe['MJD'] <= tend)])[:, 2: 8]*10**3
@@ -100,4 +97,4 @@ def moon_ephemeris(t0, tend, n_steps):
         x_moon.append(state)
     return np.array(x_moon)
 
-print("[Dataset_reader.py] ran successfully \n")
+print("[states_obtainer.py] ran successfully \n")

@@ -32,7 +32,7 @@ Y_nominal = Measurement_Model.observations_array
 P0 = 10*np.diag((initial_error))
 
 # State compensation matrix Q
-Q = np.diag([10e-11, 10e-11, 10e-11, 10e-14, 10e-14, 10e-14, 10e-12, 10e-12, 10e-12, 10e-15, 10e-15, 10e-15])
+Q = np.diag([10e-11, 10e-11, 10e-11, 10e-14, 10e-14, 10e-14, 10e-12, 10e-12, 10e-12, 10e-15, 10e-15, 10e-15])*10**-1
 #Q = np.zeros((12,12))
 # Defining weighting observations R
 R = 3**2

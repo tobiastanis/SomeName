@@ -1,6 +1,6 @@
 """
-This is the first part of the Orbit Determination model, which consists of a Dynamic model, Measurement model and a
-Estimation model.
+This is the first part of the Orbit Determination model, which consists of a Nominal Dynamic model, Measurement model
+and a Estimation model.
 
 This is the dynamic model of the propagation of LUMIO and the LLOsat. The simulation time is 10 days with a time step of
 0.01 JULIAN DAY. The simulation provides the nominal states of both LUMIO and LLOsat. Also, the model provides the
