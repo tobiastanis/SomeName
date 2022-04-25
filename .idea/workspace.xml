@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a0acce4-29d2-43b0-af26-5dd259e9a5ca" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Simulation_Models/Nominal_Simulation_Models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nominal_Simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Nominal_Simulation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Satellites.py" beforeDir="false" afterPath="$PROJECT_DIR$/Satellites.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +39,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tobia\Documents\GitHub\SomeName\Simulation_Models" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.Nominal_Simulation">
     <configuration name="Extended_Kalman_Filter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -82,7 +88,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Satellite_Characteristics (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Nominal_Simulation_Models" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SomeName" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -90,11 +96,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ObritEstimation_Model" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Simulation_Models" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ObritEstimation_Model/Satellite_Characteristics.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\tobia\Documents\GitHub\SomeName\Simulation_Models\Nominal_Simulation_Models.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -168,19 +174,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.tudat_space" />
-      <item itemvalue="Python.Satellite_Characteristics (1)" />
       <item itemvalue="Python.initial_states_obtainer" />
       <item itemvalue="Python.Nominal_Simulation" />
       <item itemvalue="Python.Extended_Kalman_Filter" />
       <item itemvalue="Python.Satellites" />
+      <item itemvalue="Python.Nominal_Simulation_Models" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.Nominal_Simulation" />
+        <item itemvalue="Python.Nominal_Simulation_Models" />
         <item itemvalue="Python.Extended_Kalman_Filter" />
         <item itemvalue="Python.Satellites" />
         <item itemvalue="Python.initial_states_obtainer" />
-        <item itemvalue="Python.Satellite_Characteristics (1)" />
       </list>
     </recent_temporary>
   </component>

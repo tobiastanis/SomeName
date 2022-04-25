@@ -7,6 +7,7 @@ sates automatically change using the states_obtainer
 from Satellites import EML2
 from Satellites import ELO
 import states_obtainer
+from Simulation_Models import Nominal_Simulation_Models
 #import general libraries
 import math
 import numpy as np
@@ -46,8 +47,17 @@ simulation_span_ephemeris = np.linspace(simulation_start_epoch, simulation_end_e
 #### Initializing ####
 EML2_initial = states_obtainer.initial_states_eml2(simulation_start_epoch_mjd)
 ELO_initial = states_obtainer.initial_states_elo(simulation_start_epoch_mjd)
-initial_states = np.vstack([EML2_initial.reshape(-1,1), ELO_initial(-1,1)])
 
+initial_states = np.vstack([EML2_initial.reshape(-1,1), ELO_initial.reshape(-1,1)])
 # Saving trajectory Moon from ephemeris
 X_Moon = states_obtainer.moon_ephemeris(simulation_start_epoch, simulation_end_epoch, n_steps)
+
+[states, output] = Nominal_Simulation_Models.higherfidelity_model(
+    simulation_start_epoch,
+    fixed_time_step,
+    simulation_end_epoch,
+    initial_states,
+    savings=1
+)
+
 
