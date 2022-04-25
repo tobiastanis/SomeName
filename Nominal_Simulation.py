@@ -18,8 +18,8 @@ print('Running [Nominal_Simulation.py]')
 #### Simulation set_up ####
 # CONTROL PANEL (changeable)
 simulation_start_epoch_mjd = 60390.00           # Modified Julian Time
-simulation_time_days = 9                        # Simulation Time [days]
-fixed_time_step = 0.001*constants.JULIAN_DAY    # Fixed Time Step [s]
+simulation_time_days = 10                        # Simulation Time [days]
+fixed_time_step = 60    # Fixed Time Step [s]
 
 # simulation_start_epoch (Ephemeris Time)
 simulation_start_epoch = states_obtainer.simulation_start_epoch(simulation_start_epoch_mjd)

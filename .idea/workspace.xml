@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a0acce4-29d2-43b0-af26-5dd259e9a5ca" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Extended_Kalman_Filter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/functions_ekf.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/phi_calculator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExtendedKalmanFilter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Extended_Kalman_Filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Extended_Kalman_Filter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nominal_Simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Nominal_Simulation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions_ekf.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions_ekf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nominal_simulators.py" beforeDir="false" afterPath="$PROJECT_DIR$/nominal_simulators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phi_calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/phi_calculator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

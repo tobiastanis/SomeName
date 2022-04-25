@@ -11,7 +11,7 @@ from tudatpy.kernel.numerical_simulation import estimation_setup
 
 spice_interface.load_standard_kernels()
 
-def Phi_higherfidelity_eml2(t, dt, X):
+def phi_higherfidelity_eml2(t, dt, X):
     simulation_start_epoch = t
     simulation_end_epoch = t + 3*dt
     fixed_time_step = dt
@@ -186,7 +186,7 @@ def phi_higherfidelity_elo(t, dt, X):
     parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Earth"))
     parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Moon"))
     parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Sun"))
-    parameter_settings.append(estimation_setup.parameter.radiation_pressure_coefficient("EML2"))
+    parameter_settings.append(estimation_setup.parameter.radiation_pressure_coefficient("ELO"))
     parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Mercury"))
     parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Venus"))
     parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Mars"))
