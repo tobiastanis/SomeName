@@ -87,10 +87,11 @@ def phi_higherfidelity_eml2(t, dt, X):
 
     variational_equations_solver = numerical_simulation.SingleArcVariationalSimulator(
         body_system, integrator_settings, propagation_settings,
-        estimation_setup.create_parameters_to_estimate(parameter_settings, body_system), integrate_on_creation=1
+        estimation_setup.create_parameters_to_estimate(parameter_settings, body_system), integrate_on_creation=1,
+        set_integrated_result=False
     )
 
-    state_transition_matrices_eml2 = variational_equations_solver.state_transition_matrix_history[t+fixed_time_step]
+    state_transition_matrices_eml2 = variational_equations_solver.state_transition_matrix_history
 
     return state_transition_matrices_eml2
 
