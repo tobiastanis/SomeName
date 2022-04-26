@@ -19,7 +19,7 @@ print('Running [Nominal_Simulation.py]')
 # CONTROL PANEL (changeable)
 simulation_start_epoch_mjd = 60390.00           # Modified Julian Time
 simulation_time_days = 9                        # Simulation Time [days]
-fixed_time_step = 300    # Fixed Time Step [s]
+fixed_time_step = 60    # Fixed Time Step [s]
 
 # simulation_start_epoch (Ephemeris Time)
 simulation_start_epoch = states_obtainer.simulation_start_epoch(simulation_start_epoch_mjd)
@@ -38,6 +38,7 @@ EML2_initial = states_obtainer.initial_states_eml2(simulation_start_epoch_mjd)
 ELO_initial = states_obtainer.initial_states_elo(simulation_start_epoch_mjd)
 
 initial_states = np.vstack([EML2_initial.reshape(-1,1), ELO_initial.reshape(-1,1)])
+
 # Saving trajectory Moon from ephemeris
 X_Moon = states_obtainer.moon_ephemeris(simulation_start_epoch, simulation_end_epoch, n_steps)
 

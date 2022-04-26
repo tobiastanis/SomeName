@@ -14,7 +14,7 @@ spice_interface.load_standard_kernels()
 def phi_higherfidelity_eml2(t, dt, X):
     simulation_start_epoch = t
     fixed_time_step = dt
-    simulation_end_epoch = t + 3*fixed_time_step
+    simulation_end_epoch = t + fixed_time_step
     initial_states = np.transpose(X[0:6])[0]
 
     ### Environment Setup ###

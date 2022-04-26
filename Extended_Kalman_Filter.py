@@ -13,7 +13,7 @@ import functions_ekf
 import numpy as np
 import csv
 #tudatpy libraries
-
+print('Running Extended Kalman Filter')
 # Initializing time
 dt = Nominal_Simulation.fixed_time_step
 estimated_initial_errors = np.array([500, 500, 500, 1e-3, 1e-3, 1e-3, 500, 500, 500, 1e-3, 1e-3, 1e-3])
@@ -70,8 +70,7 @@ for i in range(len(ephemeris_time)-1):
     # Integrating Phi
     Phi_EML2 = phi_calculator.phi_higherfidelity_eml2(ET_k_1, dt, Xstar_k_1)
     Phi_ELO = phi_calculator.phi_higherfidelity_elo(ET_k_1, dt, Xstar_k_1)
-    print(Phi_EML2)
-    quit()
+
     Phi = functions_ekf.Phi(Phi_EML2, Phi_ELO)
     # Updating P_k1_k1 to P_flat_k
     P_flat_k = np.add(np.matmul(np.matmul(Phi, P_k1_k1), np.transpose(Phi)), Qdt)
@@ -168,7 +167,7 @@ plt.legend()
 plt.xlabel('Time since epoch [days]')
 plt.ylabel('Estimated velocity error [m]')
 plt.title('ELO velocity error')
-
+print('Extended Kalman Filter Finished')
 plt.show()
 
 array_to_save = np.concatenate((np.concatenate((np.concatenate((np.transpose([ephemeris_time]), true_states), axis=1), X_ekf), axis=1), std_Pk_ekf), axis=1)
