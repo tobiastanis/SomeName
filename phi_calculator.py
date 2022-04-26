@@ -90,7 +90,7 @@ def phi_higherfidelity_eml2(t, dt, X):
         estimation_setup.create_parameters_to_estimate(parameter_settings, body_system), integrate_on_creation=1
     )
 
-    state_transition_matrices_eml2 = variational_equations_solver.state_transition_matrix_history[t+dt]
+    state_transition_matrices_eml2 = variational_equations_solver.state_transition_matrix_history[t+fixed_time_step]
 
     return state_transition_matrices_eml2
 
@@ -174,14 +174,14 @@ def phi_higherfidelity_elo(t, dt, X):
         estimation_setup.create_parameters_to_estimate(parameter_settings, body_system), integrate_on_creation=1
     )
 
-    state_transition_matrices_elo = variational_equations_solver.state_transition_matrix_history[t+dt]
+    state_transition_matrices_elo = variational_equations_solver.state_transition_matrix_history[t+fixed_time_step]
 
     return state_transition_matrices_elo
 
 def phi_highfidelity_eml2(t, dt, X):
     simulation_start_epoch = t
-    simulation_end_epoch = t + 3*dt
     fixed_time_step = dt
+    simulation_end_epoch = t + 3*fixed_time_step
     initial_states = np.transpose(X[0:6])[0]
 
     ### Environment Setup ###
@@ -255,14 +255,14 @@ def phi_highfidelity_eml2(t, dt, X):
         estimation_setup.create_parameters_to_estimate(parameter_settings, body_system), integrate_on_creation=1
     )
 
-    state_transition_matrices_eml2 = variational_equations_solver.state_transition_matrix_history[t+dt]
+    state_transition_matrices_eml2 = variational_equations_solver.state_transition_matrix_history[t+fixed_time_step]
 
     return state_transition_matrices_eml2
 
 def phi_highfidelity_elo(t, dt, X):
     simulation_start_epoch = t
-    simulation_end_epoch = t + 3*dt
     fixed_time_step = dt
+    simulation_end_epoch = t + 3*fixed_time_step
     initial_states = np.transpose(X[6:12])[0]
 
     ### Environment Setup ###
@@ -332,6 +332,6 @@ def phi_highfidelity_elo(t, dt, X):
         estimation_setup.create_parameters_to_estimate(parameter_settings, body_system), integrate_on_creation=1
     )
 
-    state_transition_matrices_elo = variational_equations_solver.state_transition_matrix_history[t+dt]
+    state_transition_matrices_elo = variational_equations_solver.state_transition_matrix_history[t+fixed_time_step]
 
     return state_transition_matrices_elo
