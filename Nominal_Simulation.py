@@ -18,8 +18,8 @@ print('Running [Nominal_Simulation.py]')
 #### Simulation set_up ####
 # CONTROL PANEL (changeable)
 simulation_start_epoch_mjd = 60390.00           # Modified Julian Time
-simulation_time_days = 1                        # Simulation Time [days]
-fixed_time_step = 0.1*constants.JULIAN_DAY    # Fixed Time Step [s]
+simulation_time_days = 9                        # Simulation Time [days]
+fixed_time_step = 300    # Fixed Time Step [s]
 
 # simulation_start_epoch (Ephemeris Time)
 simulation_start_epoch = states_obtainer.simulation_start_epoch(simulation_start_epoch_mjd)
@@ -42,7 +42,7 @@ initial_states = np.vstack([EML2_initial.reshape(-1,1), ELO_initial.reshape(-1,1
 X_Moon = states_obtainer.moon_ephemeris(simulation_start_epoch, simulation_end_epoch, n_steps)
 
 # Simulating nominal simulation
-[states, output] = nominal_simulators.higherfidelity_model(
+[states, output] = nominal_simulators.highfidelity_model(
     simulation_start_epoch,
     fixed_time_step,
     simulation_end_epoch,

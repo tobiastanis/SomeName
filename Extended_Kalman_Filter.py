@@ -31,7 +31,7 @@ Y_nominal = Measurement_Model.observations_array
 P0 = 10*np.diag((estimated_initial_errors))
 
 # State Compensation Matrix
-Qc = np.eye(6)*[0.1, 1, 1 , 0.1, 0.1, 0.1]*5e-12
+Qc = np.eye(6)*[0.1, 0.1, 1 , 0.1, 0.1, 0.1]*5e-12
 RR1 = np.concatenate((dt**2/2*np.eye(3), np.zeros((3,3))), axis=1)
 RR2 = np.concatenate((dt*np.eye(3), np.zeros((3,3))), axis=1)
 RR3 = np.concatenate((np.zeros((3,3)), dt**2/2*np.eye(3)), axis=1)
@@ -63,13 +63,15 @@ for i in range(len(ephemeris_time)-1):
     X_nominal = true_states[i+1, :]
     P_k1_k1 = Pk
     # Inegrating Xstar_k_1 to Xstar_k
-    Xstar_k = nominal_simulators.higherfidelity_model(ET_k_1, dt, ET_k_1, Xstar_k_1, savings=0)[1, :]
+    Xstar_k = nominal_simulators.highfidelity_model(ET_k_1, dt, ET_k_1, Xstar_k_1, savings=0)[1, :]
     Xstar_k = np.transpose([Xstar_k])
     # Obtaining Y_ref
     Y_ref = functions_ekf.Y(Xstar_k)
     # Integrating Phi
     Phi_EML2 = phi_calculator.phi_higherfidelity_eml2(ET_k_1, dt, Xstar_k_1)
     Phi_ELO = phi_calculator.phi_higherfidelity_elo(ET_k_1, dt, Xstar_k_1)
+    print(Phi_EML2)
+    quit()
     Phi = functions_ekf.Phi(Phi_EML2, Phi_ELO)
     # Updating P_k1_k1 to P_flat_k
     P_flat_k = np.add(np.matmul(np.matmul(Phi, P_k1_k1), np.transpose(Phi)), Qdt)

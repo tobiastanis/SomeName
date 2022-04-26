@@ -13,8 +13,8 @@ spice_interface.load_standard_kernels()
 
 def phi_higherfidelity_eml2(t, dt, X):
     simulation_start_epoch = t
-    simulation_end_epoch = t + 3*dt
     fixed_time_step = dt
+    simulation_end_epoch = t + 3*fixed_time_step
     initial_states = np.transpose(X[0:6])[0]
 
     ### Environment Setup ###
@@ -67,6 +67,7 @@ def phi_higherfidelity_eml2(t, dt, X):
 
     acceleration_models = propagation_setup.create_acceleration_models(
         body_system, acceleration_settings, bodies_to_propagate, central_bodies)
+
     termination_condition = propagation_setup.propagator.time_termination(simulation_end_epoch)
     propagation_settings = propagation_setup.propagator.translational(
         central_bodies,
@@ -81,24 +82,8 @@ def phi_higherfidelity_eml2(t, dt, X):
         simulation_start_epoch, fixed_time_step
     )
 
-    ### Dynamic Simulator ###
-    dynamic_simulator = numerical_simulation.SingleArcSimulator(
-        body_system, integrator_settings, propagation_settings
-    )
-
     parameter_settings = estimation_setup.parameter.initial_states(
         propagation_settings, body_system)
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Earth"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Moon"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Sun"))
-    parameter_settings.append(estimation_setup.parameter.radiation_pressure_coefficient("EML2"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Mercury"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Venus"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Mars"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Jupiter"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Saturn"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Uranus"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Neptune"))
 
     variational_equations_solver = numerical_simulation.SingleArcVariationalSimulator(
         body_system, integrator_settings, propagation_settings,
@@ -183,17 +168,6 @@ def phi_higherfidelity_elo(t, dt, X):
 
     parameter_settings = estimation_setup.parameter.initial_states(
         propagation_settings, body_system)
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Earth"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Moon"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Sun"))
-    parameter_settings.append(estimation_setup.parameter.radiation_pressure_coefficient("ELO"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Mercury"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Venus"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Mars"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Jupiter"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Saturn"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Uranus"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Neptune"))
 
     variational_equations_solver = numerical_simulation.SingleArcVariationalSimulator(
         body_system, integrator_settings, propagation_settings,
@@ -259,6 +233,7 @@ def phi_highfidelity_eml2(t, dt, X):
     acceleration_models = propagation_setup.create_acceleration_models(
         body_system, acceleration_settings, bodies_to_propagate, central_bodies)
     termination_condition = propagation_setup.propagator.time_termination(simulation_end_epoch)
+    #termination_condition = propagation_setup.propagator.time_termination(simulation_start_epoch + dt)
     propagation_settings = propagation_setup.propagator.translational(
         central_bodies,
         acceleration_models,
@@ -272,22 +247,8 @@ def phi_highfidelity_eml2(t, dt, X):
         simulation_start_epoch, fixed_time_step
     )
 
-    ### Dynamic Simulator ###
-    dynamic_simulator = numerical_simulation.SingleArcSimulator(
-        body_system, integrator_settings, propagation_settings
-    )
-
     parameter_settings = estimation_setup.parameter.initial_states(
         propagation_settings, body_system)
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Earth"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Moon"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Sun"))
-    parameter_settings.append(estimation_setup.parameter.radiation_pressure_coefficient("EML2"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Mercury"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Venus"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Mars"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Jupiter"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Saturn"))
 
     variational_equations_solver = numerical_simulation.SingleArcVariationalSimulator(
         body_system, integrator_settings, propagation_settings,
@@ -365,11 +326,6 @@ def phi_highfidelity_elo(t, dt, X):
 
     parameter_settings = estimation_setup.parameter.initial_states(
         propagation_settings, body_system)
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Earth"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Moon"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Sun"))
-    parameter_settings.append(estimation_setup.parameter.radiation_pressure_coefficient("ELO"))
-    parameter_settings.append(estimation_setup.parameter.gravitational_parameter("Jupiter"))
 
     variational_equations_solver = numerical_simulation.SingleArcVariationalSimulator(
         body_system, integrator_settings, propagation_settings,
